@@ -11,6 +11,12 @@ frontend/coverage
 frontend/build
 
 # misc
+.admin.txt
 .DS_Store
 frontend/.DS_Store
 backend/.DS_Store
+backend/.env
+
+backend/app/__pycache__/
+backend/backend/__pycache__/
+backend/app/migrations/__pycache__/

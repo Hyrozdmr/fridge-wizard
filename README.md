@@ -1,0 +1,1 @@
+Fridge Hero looks at ingredients in your fridge and suggests recipes for your next meals based on what is expiring first.

@@ -16,3 +16,7 @@ frontend/build
 frontend/.DS_Store
 backend/.DS_Store
 backend/.env
+
+backend/app/__pycache__/
+backend/backend/__pycache__/
+backend/app/migration/__pycache__/

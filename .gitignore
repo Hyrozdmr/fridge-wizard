@@ -19,4 +19,4 @@ backend/.env
 
 backend/app/__pycache__/
 backend/backend/__pycache__/
-backend/app/migration/__pycache__/
+backend/app/migrations/__pycache__/

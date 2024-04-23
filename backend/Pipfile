@@ -8,6 +8,8 @@ pytest = "*"
 django = "*"
 pymongo = "*"
 dnspython = "*"
+djongo = "*"
+pytz = "*"
 
 [dev-packages]
 

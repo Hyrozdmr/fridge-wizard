@@ -1,4 +1,16 @@
+# frontend/
+# dependencies
+frontend/node_modules
+froontend/.pnp
+frontend/.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+frontend/build
+
+# misc
 .DS_Store
 frontend/.DS_Store
 backend/.DS_Store
-frontend/node_modules

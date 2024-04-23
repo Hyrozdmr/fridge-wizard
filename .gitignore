@@ -11,6 +11,8 @@ frontend/coverage
 frontend/build
 
 # misc
+.admin.txt
 .DS_Store
 frontend/.DS_Store
 backend/.DS_Store
+backend/.env

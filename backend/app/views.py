@@ -14,7 +14,7 @@ def my_mongo_view():
     port = 27017
     username = 'admin'
     password = 'admin'
-    db_name = 'fridge-hero'
+    db_name = 'fridge_hero'
 
     # Get the database handle and client
     db_handle, client = get_db_handle(db_name, host, port, username, password)

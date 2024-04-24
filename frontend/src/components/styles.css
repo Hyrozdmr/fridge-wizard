@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+
+.image-container {
+  flex: 1;
+}
+
+.welcome-container {
+  display: flex;
+  margin-left: 20px;
+  flex-direction: column;
+}
+
+.welcome-button {
+  max-width: 10rem;
+  margin: 10rem;
+}
+
+.login-fields {
+  display: flex;
+  margin-left: 20px;
+  flex-direction: column;
+}

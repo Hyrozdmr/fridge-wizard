@@ -20,19 +20,29 @@ export default function Home() {
     setHomePage('logIn');
   };
 
+  // Handle log in button click
+  const handleBackClick = () => {
+    setHomePage('welcome');
+  };
+
   let componentToRender = 'welcome';
 
   if (homePage === 'signUp') {
-    componentToRender = <SignUp />;
+    componentToRender = 
+      <SignUp 
+        onBackClick={handleBackClick}
+      />;
   } else if (homePage === 'logIn') {
-    componentToRender = <LogIn />;
+    componentToRender = 
+      <LogIn 
+        onBackClick={handleBackClick}
+      />;
   } else {
-    componentToRender = (
+    componentToRender = 
       <Welcome 
         onLogInClick={handleLogInClick}
         onSignUpClick={handleSignUpClick}
       />
-    );
   }
   
   return componentToRender;

@@ -4,9 +4,11 @@ import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import FridgeImage from '../assets/Fridge-closed.jpg'
+import './styles.css';
 
 // Welcome page elements to be conditionally rendered on landing page
-export default function LogIn() {
+export default function LogIn({ onBackClick }) {
 
   const navigate = useNavigate();
 
@@ -21,12 +23,22 @@ export default function LogIn() {
 
   // Logic for submitting the form goes here
   function submission(data) {
-    
+      console.log(data.email);
       navigate('/fridge')
     }
 
   return (
-    <div>
+    <div className='container'>
+    <div className='image-container'>
+      <img src={FridgeImage} alt="Fridge" />
+    </div>
+    <div className='welcome-container'>
+
+    <Button className='welcome-button'
+        variant='contained'
+        onClick={( onBackClick )}> 
+          Back
+      </Button>
       <h1>Log in</h1>
 
       <form className='login-fields' onSubmit={handleSubmit(submission)}>
@@ -47,14 +59,12 @@ export default function LogIn() {
           >
         </SimpleTextField>
 
-        <Button variant='contained' type='submit' sx={{width: '100%'}}>
-              
+        <Button className='welcome-button' variant='contained' type='submit' sx={{width: '100%'}}> 
           Submit
-
         </Button>
 
       </form>
     </div>
+    </div>
   )
-
 }

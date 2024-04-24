@@ -1,12 +1,14 @@
-// file: frontend/src/components/logIn.js
+// file: frontend/src/components/signUp.js
 import React from 'react';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import FridgeImage from '../assets/Fridge-closed.jpg'
+import './styles.css';
 
 // Welcome page elements to be conditionally rendered on landing page
-export default function SignUp() {
+export default function SignUp({ onBackClick }) {
 
   const navigate = useNavigate();
 
@@ -26,7 +28,17 @@ export default function SignUp() {
     }
 
   return (
-    <div>
+    <div className='container'>
+    <div className='image-container'>
+      <img src={FridgeImage} alt="Fridge" />
+    </div>
+    <div className='welcome-container'>
+      <Button className='welcome-button'
+        variant='contained'
+        onClick={( onBackClick )}> 
+          Back
+      </Button>
+
       <h1>Sign up</h1>
 
       <form className='login-fields' onSubmit={handleSubmit(submission)}>
@@ -47,13 +59,11 @@ export default function SignUp() {
           >
         </SimpleTextField>
 
-        <Button variant='contained' type='submit' sx={{width: '100%'}}>
-              
+        <Button className='welcome-button' variant='contained' type='submit'>
           Submit
-
         </Button>
-    </form>
+      </form>
     </div>
+  </div>
   )
-
 }

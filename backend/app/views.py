@@ -39,7 +39,7 @@ def fridge_view(request, fridge_instance):                 #http request from cl
 
     # connect to mongo db
     client = MongoClient('mongodb://localhost:27017')
-    db = client['fridge_hero_test']
+    db = client['fridge_hero']
     collection = db['fridges']
 
     # testing if i can insert a fridge to the db

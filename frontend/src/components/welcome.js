@@ -1,6 +1,7 @@
 // file: frontend/src/components/welcome.js
 import React from 'react';
 import SimpleTextField from './forms/simpleTextField';
+import { useForm } from 'react-hook-form'
 
 
 // Welcome page elements to be conditionally rendered on landing page

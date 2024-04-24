@@ -55,3 +55,29 @@ def fridge_view(request, fridge_instance):                 #http request from cl
     client.close()
 
     return HttpResponse('Fridge created succesfully')
+
+# To test create fridge, comment out the above and use the below and Postman
+# @csrf_exempt
+# def fridge_view(request):                 #http request from client
+#     # break down the fridge object
+#     # fridge_id = fridge_instance.id
+#     # stored_items = fridge_instance.storedItems
+
+#     # connect to mongo db
+#     client = MongoClient('mongodb://localhost:27017')
+#     db = client['fridge_hero_test']
+#     collection = db['fridges']
+
+#     # testing if i can insert a fridge to the db
+#     test_fridge_data = {
+#         'fridge_id' : '1',
+#         'items' : {'category' : 'item'},
+#     }
+#     collection.insert_one(test_fridge_data)
+#     # collection.insert_one(fridge_data)
+#     print(test_fridge_data)
+
+#     # Close the client when the request is complete
+#     client.close()
+
+#     return HttpResponse('Fridge created succesfully')

@@ -4,7 +4,7 @@ def test_mongodb_connection():
     try:
         # Replace these values with your MongoDB connection details
         client = MongoClient('mongodb://localhost:27017/')
-        db = client['fridge_hero']
+        db = client['fridge_hero_test']
         collection = db['users']
 
         # Insert a document

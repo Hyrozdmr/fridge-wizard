@@ -7,8 +7,6 @@ import Home from './pages/Home';
 function App() {
   return (
     <div className="App">
-      <p>Test</p>
-
       <div>
         <Routes>
 

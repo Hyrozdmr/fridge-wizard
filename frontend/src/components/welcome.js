@@ -1,32 +1,28 @@
 // file: frontend/src/components/welcome.js
 import React from 'react';
-import SimpleTextField from './forms/simpleTextField';
-import { useForm } from 'react-hook-form'
-
+import { Button } from '@mui/material';
 
 // Welcome page elements to be conditionally rendered on landing page
-export default function Welcome() {
+// importing login click functionality
+export default function Welcome({ onLoginClick }) {
 
-  // Declare a useForm variable to handle submitting information
-  const {handleSubmit, control} = useForm({defaultValues:defaultValues})
+  // Logic for submitting the form goes here
+  function submission() {
+      // Logic change home page state
+    }
 
   return (
     <div>
+      <h1>Welcome</h1>
 
-      Welcome
-      <div className='login-field'>
+        <Button
+        variant='contained'
+        type='submit'
+        sx={{width: '100%'}}
+        onClick={(onLoginClick)}> 
+          Log in
+        </Button>
 
-          <SimpleTextField
-          label='Email'
-          name='email'
-          control={control}
-          placeholder='Input your email'
-          width={'30%'}>
-          </SimpleTextField>
-
-      </div>
-      
     </div>
-  )
-
+  );
 }

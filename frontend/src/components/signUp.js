@@ -15,6 +15,7 @@ export default function SignUp({ onBackClick }) {
   // Set default values for submitted information
   const defaultValues = {
     email:'',
+    username:'',
     password:'',
   }
 
@@ -24,6 +25,8 @@ export default function SignUp({ onBackClick }) {
   // Logic for submitting the form goes here
   function submission(data) {
       console.log(data.email);
+      console.log(data.username);
+      console.log(data.password);
       navigate('/fridge')
     }
 
@@ -39,13 +42,21 @@ export default function SignUp({ onBackClick }) {
           Back
       </Button>
 
-      <h1>Sign up</h1>
+      <h1>Get your own Fridge Hero</h1>
 
       <form className='login-fields' onSubmit={handleSubmit(submission)}>
       
         <SimpleTextField
           label='Email'
           name='email'
+          control={control}
+          width={'30%'}
+          >
+        </SimpleTextField>
+
+        <SimpleTextField
+          label='Username'
+          name='username'
           control={control}
           width={'30%'}
           >

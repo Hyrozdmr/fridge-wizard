@@ -14,7 +14,7 @@ export default function Welcome({ onSignUpClick, onLogInClick, }) {
         <img src={FridgeImage} alt="Fridge" />
       </div>
       <div className='welcome-container'>
-        <h1>Welcome</h1>
+        <h1>Welcome to Fridge Hero</h1>
 
         <Button className='welcome-button'
           variant='contained'

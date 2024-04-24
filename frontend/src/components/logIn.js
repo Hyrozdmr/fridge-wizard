@@ -24,6 +24,7 @@ export default function LogIn({ onBackClick }) {
   // Logic for submitting the form goes here
   function submission(data) {
       console.log(data.email);
+      console.log(data.password);
       navigate('/fridge')
     }
 
@@ -39,7 +40,8 @@ export default function LogIn({ onBackClick }) {
         onClick={( onBackClick )}> 
           Back
       </Button>
-      <h1>Log in</h1>
+      
+      <h1>Log in to Fridge Hero</h1>
 
       <form className='login-fields' onSubmit={handleSubmit(submission)}>
       

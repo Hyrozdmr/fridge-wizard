@@ -1,3 +1,5 @@
+# file: urls.py
+
 """
 URL configuration for backend project.
 
@@ -16,9 +18,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from app.views import FridgeViewset
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('backend.routes.users')),
+    path('fridge/', FridgeViewset.as_view({'post': 'create'}), name='fridge-create'),
 ]
 

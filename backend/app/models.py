@@ -1,6 +1,5 @@
+# file: models.py
 from django.db import models
-
-# Create your models here.
 from pymongo import MongoClient #MongoClient class  from pymongo library need it to connect to mongo DB
 
 # Fridge model handles data structures for fridges, fridge user ownership and stored items with expiry dates

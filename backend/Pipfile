@@ -9,6 +9,7 @@ django = "*"
 pymongo = "*"
 dnspython = "*"
 pytz = "*"
+djangorestframework = "*"
 
 [dev-packages]
 

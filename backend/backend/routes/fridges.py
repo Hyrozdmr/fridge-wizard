@@ -4,5 +4,5 @@ from backend.controllers import fridges as fridge_controllers
 
 urlpatterns = [
     path('create/', fridge_controllers.create, name='create'),
-    path('<str:fridge_id>/add-item/', fridge_controllers.add_item, name='add_item'),
+    path('<str:fridge_id>/add-items/', fridge_controllers.add_items, name='add_items'),
 ]

@@ -37,12 +37,12 @@ def login(request):
                 # Password incorrect
                 client.close()
                 return JsonResponse({'error': 'Password incorrect'}, status=401)
+            # token = generate_token(user['_id'])
 
             # Clean up: close the MongoDB client
             client.close()
 
-
-            return JsonResponse({'message': 'Login successful', 'user_id': str(user['_id'])}, status=200)
+            return JsonResponse({'message': 'Login successful', 'user_id': str(user)}, status=200)
         except Exception as e:
             return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
     else:

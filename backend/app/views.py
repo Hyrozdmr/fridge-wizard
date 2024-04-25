@@ -1,4 +1,4 @@
-# file: views.py
+# # file: views.py
 
 from django.shortcuts import render
 
@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Example of importing the database connection logic and creating
 # a database connection
-from .utils import get_db_handle
+from ..utils import get_db_handle
 
 def my_mongo_view():
     # Your MongoDB connection details

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-
+import os
 
 @csrf_exempt
 def generate_token(request):
@@ -16,7 +16,7 @@ def generate_token(request):
         user_id = data_json.get('user_id')
 
         if user_id:
-            token = _generate_token(str(user_id))
+            token = _generate_token(user_id)
             return JsonResponse({'token': str(token)})
         else:
             return JsonResponse({'error': 'User ID not provided'}, status=400)
@@ -47,7 +47,7 @@ def decode_token(request):
 def _generate_token(user_id):
     # Generate JWT token
     payload = {
-        'user_id': str(user_id),
+        'user_id': user_id,
         'exp': datetime.utcnow() + timedelta(days=1)
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')

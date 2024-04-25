@@ -7,6 +7,7 @@ class Fridge(models.Model):
 
     id = models.CharField(primary_key=True, max_length=100)
     storedItems = models.JSONField()
+    user_id = models.CharField(max_length=100)
 
     def save(self, *args, **kwargs): #method to save fridge data into the database
         super().save(*args, **kwargs)

@@ -17,12 +17,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from app.views import FridgeViewset
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('backend.routes.users')),
-    path('fridge/', FridgeViewset.as_view({'post': 'create'}), name='fridge-create'),
+    path('fridges/', include('backend.routes.fridges')),
 ]
-

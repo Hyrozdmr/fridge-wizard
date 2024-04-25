@@ -1,5 +1,6 @@
 // file: frontend/src/components/signUp.js
 import React from 'react';
+import AxiosInstance from './axios';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
@@ -24,11 +25,22 @@ export default function SignUp({ onBackClick }) {
 
   // Logic for submitting the form goes here
   function submission(data) {
-      console.log(data.email);
-      console.log(data.username);
-      console.log(data.password);
-      navigate('/fridge')
-    }
+    // Define the data structure with hardcoded array of strings for storedItems
+    const fridgeData = {
+      storedItems: ["Item1", "Item2", "Item3"] // Hardcoded array of strings
+    };
+    console.log(data.email);
+    console.log(data.username);
+    console.log(data.password);
+    AxiosInstance.post( 'fridge/', fridgeData)
+      .then((res) => {
+        navigate('/')
+      })
+      .catch((error) => {
+        // Handle error if POST request fails
+        console.error('Error:', error);
+    });
+  }
 
   return (
     <div className='container'>

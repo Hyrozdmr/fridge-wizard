@@ -54,9 +54,16 @@ export default function SignUp({ onBackClick }) {
     console.log('New user with ' + data.email + ' signed up');
 
     // Send post request with fridgeData body to create endpoint
+    // And then on success navigate to fridge page passing on
+    // User id details to get fridge on next page
     AxiosInstance.post( 'fridges/create/', fridgeData)
       .then((res) => {
-        navigate('/fridge/')
+        navigate(
+          '/fridge/',
+          { state:{
+            user_id: fridgeData.user_id}
+          }
+        )
       })
       .catch((error) => {
         // Handle error if POST request fails

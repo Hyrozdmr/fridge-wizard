@@ -1,10 +1,9 @@
 from django.http import JsonResponse
-from app.models import Fridge
 from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient
-# from ...utils import get_db_handle
 import json
 
+# Set up function for getting db connection
 def get_db_handle(db_name, host, port, username, password):
 
     client = MongoClient(host=host,
@@ -17,7 +16,7 @@ def get_db_handle(db_name, host, port, username, password):
 
 @csrf_exempt # Disables CSRF protection for this view
 def create(request):
-
+    # Check if post method in request
     if request.method == 'POST':
         data = json.loads(request.body)
         storedItems = data.get('storedItems')
@@ -31,7 +30,8 @@ def create(request):
                                     password='')
         print('getting this far')
         fridges_collection = db['fridges']
-        # Insert the new fridge
+
+        # Insert the new fridge into the db
         fridge_id = fridges_collection.insert_one({
             'storedItems': storedItems,
             'user_id': user_id,
@@ -40,6 +40,8 @@ def create(request):
         # Clean up: close the MongoDB client
         client.close()
 
+        # Response depends on success / error 
+        # Success returns new fridge_id
         return JsonResponse({'message': 'Fridge created successfully', 'fridge_id': str(fridge_id)}, status=201)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)

@@ -11,6 +11,7 @@ import './styles.css';
 // Welcome page elements to be conditionally rendered on landing page
 export default function SignUp({ onBackClick }) {
 
+  // Set navigate function to be used by buttons following user input
   const navigate = useNavigate();
 
   // Set default values for submitted information
@@ -26,7 +27,7 @@ export default function SignUp({ onBackClick }) {
   // Logic for submitting the form goes here
   function submission(data) {
     // Define the data structure with hardcoded array of strings for storedItems
-    // Get today's date
+    // Get today's date and declare function for adding / subtracting days
     const today = new Date();
     function addDays(date, days) {
       var result = new Date(date);
@@ -34,6 +35,7 @@ export default function SignUp({ onBackClick }) {
       return result;
     }
 
+    // Set data to be sent with request when creating new fridge
     const fridgeData = {
       storedItems: {
         'Welcome pack':{
@@ -47,7 +49,11 @@ export default function SignUp({ onBackClick }) {
         },
       user_id : "662a2ecac531a17f726fcbc1"
     };
+
+    // Log user creation success
     console.log('New user with ' + data.email + ' signed up');
+
+    // Send post request with fridgeData body to create endpoint
     AxiosInstance.post( 'fridges/create/', fridgeData)
       .then((res) => {
         navigate('/fridge/')
@@ -56,6 +62,8 @@ export default function SignUp({ onBackClick }) {
         // Handle error if POST request fails
         console.error('Error:', error);
     });
+
+    // Log fridge creation success
     console.log('Created default fridge for user_id ' + fridgeData.user_id);
   }
 

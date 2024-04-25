@@ -20,15 +20,8 @@ def create(request):
 
     if request.method == 'POST':
         data = json.loads(request.body)
-        storedItems = [{
-            'category1':{
-                'item1':'expiry1',
-                'item2':'expiry2'},
-            'category2':{
-                'item3':'expiry3',
-                'item4':'expiry4'}
-            }
-        ]
+        storedItems = data.get('storedItems')
+        user_id = data.get('user_id')
         
         # Get the database handle
         db, client = get_db_handle(db_name='fridge_hero',
@@ -41,6 +34,7 @@ def create(request):
         # Insert the new fridge
         fridge_id = fridges_collection.insert_one({
             'storedItems': storedItems,
+            'user_id': user_id,
         }).inserted_id
 
         # Clean up: close the MongoDB client

@@ -27,14 +27,22 @@ export default function SignUp({ onBackClick }) {
   function submission(data) {
     // Define the data structure with hardcoded array of strings for storedItems
     const fridgeData = {
-      storedItems: ["Item1", "Item2", "Item3"] // Hardcoded array of strings
+      storedItems: {
+        'category1':{
+            'item1':'expiry1',
+            'item2':'expiry2'},
+        'category2':{
+            'item3':'expiry3',
+            'item4':'expiry4'}
+        },
+      user_id : "662a2ecac531a17f726fcbc1"
     };
     console.log(data.email);
     console.log(data.username);
     console.log(data.password);
-    AxiosInstance.post( 'fridge/', fridgeData)
+    AxiosInstance.post( 'fridges/create/', fridgeData)
       .then((res) => {
-        navigate('/')
+        navigate('/fridge/')
       })
       .catch((error) => {
         // Handle error if POST request fails

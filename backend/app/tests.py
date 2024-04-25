@@ -7,6 +7,7 @@ from django.test import TestCase
 from django.test import TestCase, RequestFactory
 
 
+
 class TestSignUpUser(TestCase):
     def test_signup_user_success(self):
 
@@ -40,3 +41,6 @@ class TestSignUpUser(TestCase):
 
     #     # Assertions
     #     self.assertEqual(response.status_code, 405)
+
+
+

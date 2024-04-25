@@ -44,25 +44,8 @@ def my_mongo_view():
     result = collection.find_one({'some_key': 'some_value'})
     
     # Don't forget to close the client when you're done
+    
     client.close()
 
-def create_user_view(request):
-    user_data = {
-    'id': '011',
-    'username': 'kevin',
-    'email': 'kevin@gmail.com',
-    'password': 'pass123'
-    }
-    response = create_user(user_data)
-    if response.status_code == 201:
-        return HttpResponse('User created successfully', status=201)
-    else:
-        return HttpResponse('Failed to create user', status=response.status_code)
 
-def get_user_view(request, user_id):
-    response = get_user(user_id)
-    if response.status_code == 200:
-        user_data = response.json()
-        return HttpResponse(f'User data: {user_data}', status=200)
-    else:
-        return HttpResponse('User not found', status=response.status_code)
+  

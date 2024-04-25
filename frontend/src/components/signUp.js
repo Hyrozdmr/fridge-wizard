@@ -26,20 +26,28 @@ export default function SignUp({ onBackClick }) {
   // Logic for submitting the form goes here
   function submission(data) {
     // Define the data structure with hardcoded array of strings for storedItems
+    // Get today's date
+    const today = new Date();
+    function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
     const fridgeData = {
       storedItems: {
-        'category1':{
-            'item1':'expiry1',
-            'item2':'expiry2'},
-        'category2':{
-            'item3':'expiry3',
-            'item4':'expiry4'}
+        'Welcome pack':{
+            'Expired hot sauce': addDays(today, -7),
+            'White miso paste': addDays(today, 7) },
+        'Vegetables':{ },
+        'Fruit':{ },
+        'Meat':{ },
+        'Dairy':{ },
+        'Misc':{ }
         },
       user_id : "662a2ecac531a17f726fcbc1"
     };
-    console.log(data.email);
-    console.log(data.username);
-    console.log(data.password);
+    console.log('New user with ' + data.email + ' signed up');
     AxiosInstance.post( 'fridges/create/', fridgeData)
       .then((res) => {
         navigate('/fridge/')
@@ -48,6 +56,7 @@ export default function SignUp({ onBackClick }) {
         // Handle error if POST request fails
         console.error('Error:', error);
     });
+    console.log('Created default fridge for user_id ' + fridgeData.user_id);
   }
 
   return (

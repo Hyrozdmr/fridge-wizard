@@ -1,6 +1,6 @@
 import AxiosInstance from '../components/axios';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ItemList from '../components/itemsList';
 import FridgeImage from '../assets/Fridge-open.jpg'
 
@@ -10,37 +10,38 @@ export default function Fridge() {
   const [ currentFridgeContents, setCurrentFridgeContent ] = useState(userId);
   console.log('Printed on fridge page:', userId);
 
+  useEffect(() => {
+    if (userId) {
+      getFridgeData(userId);
+    }
+  }, [userId]);
+
   // Logic for getting fridge data goes here
   function getFridgeData(data) {
-    // Set data (user_id) to be sent with request when getting fridge
-    const userData = {
-      user_id : userId
-    };
+    // Send get request with userData body to get endpoint
+    AxiosInstance.get( 'fridges/get/', { params: { user_id: userId  } })
+    .then(response => {
+      // Handle successful response
+      console.log('Data:', response.data);
+      setCurrentFridgeContent(response.data);
+    })
+    .catch((error) => {
+      // Handle error if POST request fails
+      console.error('Error:', error);
+  });
 
     // Log user creation success
     console.log('Requesting fridge data for user ', userId);
-
-    // Send get request with userData body to get endpoint
-    // And then on success navigate set fridge item contents
-    AxiosInstance.get( 'fridges/get/', { params: userData })
-      .then(response => {
-        // Handle successful response
-        console.log('Data:', response.data);
-      })
-      .catch((error) => {
-        // Handle error if POST request fails
-        console.error('Error:', error);
-    });
   }
 
   return (
     <div>
-      <p>{userId}</p>
+      <p>User id: {userId}</p>
       <img src={FridgeImage} alt="Fridge" />
       <ItemList 
-        userId={userId}
+        returnedFridgeData={currentFridgeContents}
       />
-      <button onClick={getFridgeData}>
+      <button onClick={() => getFridgeData(userId)}>
         Refresh fridge
       </button>
     </div>

@@ -47,7 +47,7 @@ export default function SignUp({ onBackClick }) {
         'Dairy':{ },
         'Misc':{ }
         },
-      user_id : "662a2ecac531a17f726fcbc1"
+      user_id : "662a6899f9640ba036390714"
     };
 
     // Log user creation success

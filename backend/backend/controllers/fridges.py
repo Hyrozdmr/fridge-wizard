@@ -54,8 +54,12 @@ def create(request):
 def get(request):
     # Check if get method in request
     if request.method == 'GET':
-        data = json.loads(request.body)
-        user_id = data.get('user_id')
+        # Get the user id supplied as params with the get request
+        user_id = request.GET.get('user_id')
+
+        if not user_id:
+            return JsonResponse({'error': 'user_id parameter is missing'}, status=400)
+
         
         # Get the database handle
         db, client = get_db_handle(db_name='fridge_hero',
@@ -77,7 +81,7 @@ def get(request):
         if fridge_data:
             # Convert ObjectId to string before serializing to JSON
             fridge_data['_id'] = str(fridge_data['_id'])
-            return JsonResponse({'message': 'Fridge found', 'fridge_data': fridge_data}, status=200)
+            return JsonResponse({'fridge_data': fridge_data}, status=200)
         else:
             return JsonResponse({'error': 'Fridge not found'}, status=404)
     else:

@@ -106,5 +106,6 @@ export default function Fridge() {
           <img src={FridgeImage} alt="Fridge" />
         </div>
       </div>
-  );
+    );
+  }
 }

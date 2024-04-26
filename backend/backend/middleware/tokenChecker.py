@@ -1,7 +1,9 @@
 
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from ..lib import DecodeToken
+from ..lib.token import decode_token
+
+
 class AuthenticationMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -12,11 +14,11 @@ class AuthenticationMiddleware:
 
         # Decode and validate token
         try:
-            decoded_token = DecodeToken(token_string)
+            decoded_token = decode_token(token_string)
             user_id = decoded_token.get('userID')
 
             # Check if user exists
-            user = User.objects.get(id=user_id)
+            user = user.objects.get(id=user_id)
 
             # Store user ID in request for later use
             request.user_id = user_id

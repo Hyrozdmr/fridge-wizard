@@ -1,7 +1,7 @@
-from django.urls import path
-from backend.controllers.authentication import create_token
+# from django.urls import path
+# from . import authentication 
 
 
-urlpatterns = [
-    path('/', create_token, name='create_token'),
-]
+# urlpatterns = [
+#     path('create-token/', authentication.create_token, name='create_token'),
+# ]

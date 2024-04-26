@@ -4,20 +4,17 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
-import os
 
 @csrf_exempt
 def generate_token(request):
     if request.method == 'POST':
         # Extract user ID from request body
-        data = request.body.decode('utf-8')
-        data_json = json.loads(data)
-        user_id = data_json.get('user_id')
+        data = json.loads(request.body.decode('utf-8'))
+        user_id = data.get('user_id')
 
         if user_id:
             token = _generate_token(user_id)
-            return JsonResponse({'token': str(token)})
+            return JsonResponse({'token': token})
         else:
             return JsonResponse({'error': 'User ID not provided'}, status=400)
     else:
@@ -26,10 +23,16 @@ def generate_token(request):
 @csrf_exempt
 def decode_token(request):
     if request.method == 'POST':
-        # Extract token from request body
-        data = request.body.decode('utf-8')
-        data_json = json.loads(data)
-        token = data_json.get('token')
+
+        # When decoding the token, 
+        # expecting the token to be provided in the request body 
+        # (data = request.body.decode('utf-8')).
+        # in typical usage, the token is usually sent in the request headers 
+        # as an Authorization token. So, you should decode the token 
+        # from the request headers instead of the request body
+
+        # Extract token from request headers
+        token = request.headers.get('Authorization', '').split(' ')[1] if 'Authorization' in request.headers else None
 
         if token:
             try:
@@ -44,10 +47,12 @@ def decode_token(request):
     else:
         return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
 
+
 def _generate_token(user_id):
     # Generate JWT token
     payload = {
-        'user_id': user_id,
-        'exp': datetime.utcnow() + timedelta(days=1)
+        'user_id': str(user_id),
+        'exp': datetime.utcnow() + timedelta(minutes=10)
     }
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')
+    token = jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')
+    return token.decode('utf-8')  # Convert bytes to string for JSON serialization

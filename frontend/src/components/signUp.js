@@ -1,16 +1,20 @@
 // file: frontend/src/components/signUp.js
 import React from 'react';
+import AxiosInstance from './axios';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import FridgeImage from '../assets/Fridge-closed.jpg'
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import FridgeImage from '../assets/Fridge-closed.jpg';
 import './styles.css';
+import { signup } from '../services/user_services';
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function SignUp({ onBackClick }) {
 
+  // Set navigate function to be used by buttons following user input
   const navigate = useNavigate();
+  
 
   // Set default values for submitted information
   const defaultValues = {
@@ -20,15 +24,55 @@ export default function SignUp({ onBackClick }) {
   }
 
   // Declare a useForm variable to handle submitting information
-  const {handleSubmit, control} = useForm({defaultValues:defaultValues})
+  const {handleSubmit, control} = useForm({defaultValues:defaultValues})  
 
-  // Logic for submitting the form goes here
-  function submission(data) {
-      console.log(data.email);
-      console.log(data.username);
-      console.log(data.password);
-      navigate('/fridge')
+
+  async function submission(data) {
+    try {
+      await signup(data.username, data.email, data.password);
+
+      const today = new Date();
+      function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+      }
+      const fridgeData = {// Set data to be sent with request when creating new fridge
+        storedItems: {
+          'Welcome pack':{
+            'Expired hot sauce': addDays(today, -7),
+            'White miso paste': addDays(today, 7)
+          },
+          'Vegetables':{ },
+          'Fruit':{ },
+          'Meat':{ },
+          'Dairy':{ },
+          'Misc':{ }
+        },
+
+      user_id : "662a6899f9640ba036390714"
+    };
+
+    // Send post request with fridgeData body to create endpoint
+    // And then on success navigate to fridge page passing on
+    // User id details to get fridge on next page
+    AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
+      .then((res) => {
+        navigate(
+          '/fridge/',
+          { state:{
+            user_id: fridgeData.user_id}
+          }
+        )})
+      .catch((error) => {// Handle error if POST request fails
+        console.error('Error:', error);
+      });
+
+    } catch (error) {
+      console.error('Error signing up:', error.message);
     }
+
+  }
 
   return (
     <div className='container'>
@@ -76,5 +120,6 @@ export default function SignUp({ onBackClick }) {
       </form>
     </div>
   </div>
-  )
+  );
 }
+

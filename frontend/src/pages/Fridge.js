@@ -22,7 +22,6 @@ export default function Fridge() {
     AxiosInstance.get( 'fridges/get/', { params: { user_id: userId  } })
     .then(response => {
       // Handle successful response
-      console.log('Data:', response.data);
       setCurrentFridgeContent(response.data);
     })
     .catch((error) => {

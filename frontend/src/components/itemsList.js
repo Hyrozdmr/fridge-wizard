@@ -12,9 +12,9 @@ export default function ItemList({ returnedFridgeData }) {
   }
   console.log("returnedFridgeData:", returnedFridgeData); // Add this line for debugging
 
-    // Access storedItems from fridge_data
-    const { storedItems } = returnedFridgeData.fridge_data;
-    console.log(storedItems)
+  // Access storedItems from fridge_data
+  const { storedItems } = returnedFridgeData.fridge_data;
+  console.log(storedItems)
 
   return (
     <div>
@@ -22,8 +22,8 @@ export default function ItemList({ returnedFridgeData }) {
         <div key={category}>
           <h2>{category}</h2>
           <ul>
-            {Object.entries(items).map(([itemName, itemDetails]) => (
-              <p key={itemName}>{itemName}</p>
+            {Object.entries(items).map(([itemName, value]) => (
+              <p key={itemName}>{`${itemName}: ${value}`}</p>
             ))}
           </ul>
         </div>

@@ -35,15 +35,21 @@ export default function Fridge() {
   }
 
   return (
-    <div>
-      <p>User id: {userId}</p>
-      <img src={FridgeImage} alt="Fridge" />
-      <ItemList 
-        returnedFridgeData={currentFridgeContents}
-      />
-      <button onClick={() => getFridgeData(userId)}>
-        Refresh fridge
-      </button>
+    <div style={{display: 'flex', flexDirection: 'row', padding: '4em'}}>
+
+      <div style={{paddingRight: '8em'}}>
+        <ItemList 
+          returnedFridgeData={currentFridgeContents}
+        />
+        <button onClick={() => getFridgeData(userId)}>
+          Refresh fridge
+        </button>
+      </div>
+
+      <div>
+        <p>User id: {userId}</p>
+        <img src={FridgeImage} alt="Fridge" />
+      </div>
     </div>
   )
 }

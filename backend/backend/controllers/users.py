@@ -25,7 +25,7 @@ def signup(request):
         password = data.get('password')  # Consider hashing this
 
         # Get the database handle
-        db, client = get_db_handle(db_name='fridge-hero',
+        db, client = get_db_handle(db_name='fridge_hero',
                                    host='localhost',
                                    port=27017,
                                    username='',

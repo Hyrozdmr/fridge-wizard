@@ -7,12 +7,16 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import FridgeImage from '../assets/Fridge-closed.jpg'
 import './styles.css';
+import { signup } from '/Users/kevineboda/finalproject/fridge-hero/frontend/src/services/user_services.js';
+
+
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function SignUp({ onBackClick }) {
 
   // Set navigate function to be used by buttons following user input
   const navigate = useNavigate();
+  
 
   // Set default values for submitted information
   const defaultValues = {
@@ -22,7 +26,16 @@ export default function SignUp({ onBackClick }) {
   }
 
   // Declare a useForm variable to handle submitting information
-  const {handleSubmit, control} = useForm({defaultValues:defaultValues})
+  const {handleSubmit, control} = useForm({defaultValues:defaultValues})  
+
+
+  async function submission(data) {
+    try {
+      await signup(data.username, data.email, data.password);
+      navigate('/fridge');
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+      // Handle error (e.g., display error message to the user)
 
   // Logic for submitting the form goes here
   function submission(data) {
@@ -34,6 +47,16 @@ export default function SignUp({ onBackClick }) {
       result.setDate(result.getDate() + days);
       return result;
     }
+  }
+  
+
+  // Logic for submitting the form goes here
+  // function submission(data) {
+  //     console.log(data.email);
+  //     console.log(data.username);
+  //     console.log(data.password);
+  //     navigate('/fridge')
+  //   }
 
     // Set data to be sent with request when creating new fridge
     const fridgeData = {

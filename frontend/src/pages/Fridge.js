@@ -26,16 +26,18 @@ export default function Fridge() {
     }
   }, [userId]);
 
-  function getFridgeData(userId) {
-    AxiosInstance.get('fridges/get/', { params: { user_id: userId } })
-        .then(response => {
-          console.log('Data:', response.data);
-          setCurrentFridgeContent(response.data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-  }
+  // Logic for getting fridge data goes here
+  function getFridgeData(data) {
+    // Send get request with userData body to get endpoint
+    AxiosInstance.get( 'fridges/get/', { params: { user_id: userId  } })
+    .then(response => {
+      // Handle successful response
+      setCurrentFridgeContent(response.data);
+    })
+    .catch((error) => {
+      // Handle error if POST request fails
+      console.error('Error:', error);
+  });
 
   function addItemToFridge() {
     // Check if all fields are filled
@@ -46,7 +48,6 @@ export default function Fridge() {
 
     // Format the date to include time ('T00:00:00Z' for midnight UTC)
     const formattedExpiryDate = new Date(expiryDate).toISOString().slice(0, 11) + "00:00:00Z";
-
     console.log("Adding item:", { itemName, itemCategory, formattedExpiryDate });
     console.log ("fridge contents", currentFridgeContents.fridge_data._id)
 

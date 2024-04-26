@@ -29,14 +29,17 @@ export default function SignUp({ onBackClick }) {
 
   async function submission(data) {
     try {
-      await signup(data.username, data.email, data.password);
-
+      await signup(data.username, data.email, data.password)
+      .then((res) => {
+        let user_id = res.user_id;
+      
       const today = new Date();
       function addDays(date, days) {
         var result = new Date(date);
         result.setDate(result.getDate() + days);
         return result;
       }
+      
       const fridgeData = {// Set data to be sent with request when creating new fridge
         storedItems: {
           'Welcome pack':{
@@ -50,28 +53,32 @@ export default function SignUp({ onBackClick }) {
           'Misc':{ }
         },
 
-      user_id : "662a6899f9640ba036390714"
-    };
+        user_id : user_id
+
+      };
 
     // Send post request with fridgeData body to create endpoint
     // And then on success navigate to fridge page passing on
     // User id details to get fridge on next page
     AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
-      .then((res) => {
-        navigate(
-          '/fridge/',
-          { state:{
-            user_id: fridgeData.user_id}
-          }
-        )})
-      .catch((error) => {// Handle error if POST request fails
-        console.error('Error:', error);
-      });
 
-    } catch (error) {
+    AxiosInstance.post('users/login/', data)
+    .then((res) => {
+      console.log(res.data.user_id);
+      localStorage.setItem("token", res.data.token);
+      navigate(
+        '/fridge/',
+        { state:{
+          user_id: res.data.user_id}
+        }
+    )})
+    .catch((error) => {// Handle error if POST request fails
+      console.error('Error:', error);
+    });
+
+    })} catch (error) {
       console.error('Error signing up:', error.message);
     }
-
   }
 
   return (

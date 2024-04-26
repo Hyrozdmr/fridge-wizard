@@ -13,11 +13,11 @@ export default function Fridge() {
   const [expiryDate, setExpiryDate] = useState('');
 
   const categories = [
-    { label: '🥕 Vegetables', value: 'vegetables' },
-    { label: '🍖 Meat', value: 'meat' },
-    { label: '🍎 Fruits', value: 'fruits' },
-    { label: '🧀 Dairy', value: 'dairy' },
-    { label: '🥫 Miscellaneous', value: 'canned_goods' }
+    { label: '🥕 Vegetables', value: 'Vegetables' },
+    { label: '🍖 Meat', value: 'Meat' },
+    { label: '🍎 Fruit', value: 'Fruit' },
+    { label: '🧀 Dairy', value: 'Dairy' },
+    { label: '🥫 Miscellaneous', value: 'Misc' }
   ];
 
   useEffect(() => {
@@ -38,23 +38,38 @@ export default function Fridge() {
   }
 
   function addItemToFridge() {
-    AxiosInstance.patch(`fridges/${userId}/add-items/`, {
+    // Check if all fields are filled
+    if (!itemName || !itemCategory || !expiryDate) {
+      alert("Please fill all fields before adding an item.");
+      return;
+    }
+
+    // Format the date to include time ('T00:00:00Z' for midnight UTC)
+    const formattedExpiryDate = new Date(expiryDate).toISOString().slice(0, 11) + "00:00:00Z";
+
+    console.log("Adding item:", { itemName, itemCategory, formattedExpiryDate });
+    console.log ("fridge contents", currentFridgeContents.fridge_data._id)
+
+    AxiosInstance.patch(`fridges/${currentFridgeContents.fridge_data._id}/add-items/`, {
       items: [{
         name: itemName,
         category: itemCategory,
-        expiry_date: expiryDate
+        expiry_date: formattedExpiryDate
       }]
-    }).then(response => {
-      console.log('Item added:', response.data);
-      // Optionally clear the form here and refresh fridge data
-      setItemName('');
-      setItemCategory('');
-      setExpiryDate('');
-      getFridgeData(userId);
-    }).catch(error => {
-      console.error('Error adding item:', error);
-    });
+    })
+        .then(response => {
+          console.log('Item added:', response.data);
+          // Optionally clear the form here and refresh fridge data
+          setItemName('');
+          setItemCategory('');
+          setExpiryDate('');
+          getFridgeData(userId);
+        })
+        .catch(error => {
+          console.error('Error adding item:', error);
+        });
   }
+
 
   return (
       <div style={{display: 'flex', flexDirection: 'row', padding: '4em'}}>

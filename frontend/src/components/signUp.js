@@ -35,60 +35,63 @@ export default function SignUp({ onBackClick }) {
       navigate('/fridge');
     } catch (error) {
       console.error('Error signing up:', error.message);
-      // Handle error (e.g., display error message to the user)
-
-  // Logic for submitting the form goes here
-  function submission(data) {
-    // Define the data structure with hardcoded array of strings for storedItems
-    // Get today's date and declare function for adding / subtracting days
-    const today = new Date();
-    function addDays(date, days) {
-      var result = new Date(date);
-      result.setDate(result.getDate() + days);
-      return result;
     }
   }
+
+      // Handle error (e.g., display error message to the user)
+
+  // // Logic for submitting the form goes here
+  //  function submission(data) {
+  // //    Define the data structure with hardcoded array of strings for storedItems
+  // //   Get today's date and declare function for adding / subtracting days
+  //    const today = new Date();
+  //    function addDays(date, days) {
+  //      var result = new Date(date);
+  //      result.setDate(result.getDate() + days);
+  //      return result;
+  //    }
+  //  }
   
 
-  // Logic for submitting the form goes here
-  // function submission(data) {
-  //     console.log(data.email);
-  //     console.log(data.username);
-  //     console.log(data.password);
-  //     navigate('/fridge')
-  //   }
+  // // Logic for submitting the form goes here
+  //  function submission(data) {
+  //      console.log(data.email);
+  //      console.log(data.username);
+  //      console.log(data.password);
+  //      navigate('/fridge')
+  //    }
 
-    // Set data to be sent with request when creating new fridge
-    const fridgeData = {
-      storedItems: {
-        'Welcome pack':{
-            'Expired hot sauce': addDays(today, -7),
-            'White miso paste': addDays(today, 7) },
-        'Vegetables':{ },
-        'Fruit':{ },
-        'Meat':{ },
-        'Dairy':{ },
-        'Misc':{ }
-        },
-      user_id : "662a2ecac531a17f726fcbc1"
-    };
+  //   // Set data to be sent with request when creating new fridge
+  //   const fridgeData = {
+  //     storedItems: {
+  //       'Welcome pack':{
+  //           'Expired hot sauce': addDays(today, -7),
+  //           'White miso paste': addDays(today, 7) },
+  //       'Vegetables':{ },
+  //       'Fruit':{ },
+  //       'Meat':{ },
+  //       'Dairy':{ },
+  //       'Misc':{ }
+  //       },
+  //     user_id : "662a2ecac531a17f726fcbc1"
+  //   };
 
-    // Log user creation success
-    console.log('New user with ' + data.email + ' signed up');
+  //   // Log user creation success
+  //   console.log('New user with ' + data.email + ' signed up');
 
-    // Send post request with fridgeData body to create endpoint
-    AxiosInstance.post( 'fridges/create/', fridgeData)
-      .then((res) => {
-        navigate('/fridge/')
-      })
-      .catch((error) => {
-        // Handle error if POST request fails
-        console.error('Error:', error);
-    });
+  //   // Send post request with fridgeData body to create endpoint
+  //   AxiosInstance.post( 'fridges/create/', fridgeData)
+  //     .then((res) => {
+  //       navigate('/fridge/')
+  //     })
+  //     .catch((error) => {
+  //       // Handle error if POST request fails
+  //       console.error('Error:', error);
+  //   });
 
-    // Log fridge creation success
-    console.log('Created default fridge for user_id ' + fridgeData.user_id);
-  }
+  //   // Log fridge creation success
+  //   console.log('Created default fridge for user_id ' + fridgeData.user_id);
+  // }
 
   return (
     <div className='container'>
@@ -136,5 +139,6 @@ export default function SignUp({ onBackClick }) {
       </form>
     </div>
   </div>
-  )
+  );
 }
+

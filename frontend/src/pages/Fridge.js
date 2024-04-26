@@ -37,7 +37,8 @@ export default function Fridge() {
     .catch((error) => {
       // Handle error if POST request fails
       console.error('Error:', error);
-  });
+    });
+  }
 
   function addItemToFridge() {
     // Check if all fields are filled
@@ -107,5 +108,4 @@ export default function Fridge() {
         </div>
       </div>
     );
-  }
 }

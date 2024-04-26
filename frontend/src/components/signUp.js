@@ -63,7 +63,7 @@ export default function SignUp({ onBackClick }) {
           { state:{
             user_id: fridgeData.user_id}
           }
-        )
+        )})
       .catch((error) => {// Handle error if POST request fails
         console.error('Error:', error);
       });

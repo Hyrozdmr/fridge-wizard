@@ -1,5 +1,6 @@
 // file: frontend/src/components/logIn.js
 import React from 'react';
+import AxiosInstance from './axios';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
@@ -22,11 +23,33 @@ export default function LogIn({ onBackClick }) {
   const {handleSubmit, control} = useForm({defaultValues:defaultValues})
 
   // Logic for submitting the form goes here
-  function submission(data) {
-      console.log(data.email);
-      console.log(data.password);
-      navigate('/fridge')
+  async function submission(data) {
+    try {
+      let userInfo = {
+        email: data.email,
+        password: data.password
+      }
+
+      AxiosInstance.post('users/login/', userInfo)
+      .then((res) => {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+      })
+      // AxiosInstance.post('fridges/create/') // Send post request with fridgeData body to create endpoint
+      // .then((res) => {
+      //   navigate(
+      //     '/fridge/',
+      //     // { state:{
+      //     //   user_id: fridgeData.user_id}
+      //     // }
+      //   )})
+      .catch((error) => {// Handle error if POST request fails
+        console.error('Error:', error);
+      });
+    } catch (error) {
+      console.log('Error logging in:', error.message);
     }
+  }
 
   return (
     <div className='container'>

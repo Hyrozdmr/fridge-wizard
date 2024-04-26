@@ -3,11 +3,11 @@ import React from 'react';
 import AxiosInstance from './axios';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import FridgeImage from '../assets/Fridge-closed.jpg'
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import FridgeImage from '../assets/Fridge-closed.jpg';
 import './styles.css';
-import { signup } from '/Users/kevineboda/finalproject/fridge-hero/frontend/src/services/user_services.js';
+import { signup } from '../services/user_services';
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function SignUp({ onBackClick }) {

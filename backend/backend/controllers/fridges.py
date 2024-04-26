@@ -1,11 +1,9 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from pymongo import MongoClient
-from bson import ObjectId
+from pymongo import MongoClient, UpdateOne
 import json
 import pymongo
 from bson import ObjectId
-from pymongo import UpdateOne
 
 
 # Set up function for getting db connection
@@ -102,6 +100,7 @@ def add_items(request, fridge_id):
             fridges_collection = db['fridges']
 
             updates = []
+            print( 'items', items)
             for item in items:
                 item_category = item.get('category')
                 item_name = item.get('name')
@@ -112,16 +111,18 @@ def add_items(request, fridge_id):
                         {'$set': {f'storedItems.{item_category}.{item_name}': expiry_date}}
                     )
                 )
-
+            print('updates', updates)
+            print('collection', fridges_collection)
             if updates:
                 update_result = fridges_collection.bulk_write(updates)
-
+                print('this is running')
+            print('update result', update_result)
+            print ('modified count', update_result.modified_count)
             client.close()
-
             if updates and update_result.modified_count > 0:
                 return JsonResponse({'message': f'{update_result.modified_count} items added successfully'}, status=200)
             else:
-                return JsonResponse({'message': 'No items were added', 'details': str(update_result.bulk_api_result)}, status=200)
+                return JsonResponse({'message': 'No items were added', 'details': str(update_result.bulk_api_result)}, status=500)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:

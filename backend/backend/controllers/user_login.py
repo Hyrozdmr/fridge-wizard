@@ -1,6 +1,5 @@
 import jwt
 from datetime import datetime, timedelta
-from django.contrib.auth.hashers import check_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient
@@ -27,7 +26,7 @@ def login(request):
         password = data.get('password')
 
         # Get the database handle
-        db, client = get_db_handle(db_name='fridge-hero',
+        db, client = get_db_handle(db_name='fridge_hero',
                                    host='localhost', 
                                    port=27017, username='', 
                                    password='')
@@ -39,13 +38,12 @@ def login(request):
             user = users_collection.find_one({'email': email})
             if not user:
                 # User not found
-                client.close()
                 return JsonResponse({'error': 'User not found'}, status=404)
             
             # Check if the password matches
-            if not check_password(password, user['password']):
+            # if not check_password(password, user['password']):
+            if password != user['password']:
                 # Password incorrect
-                client.close()
                 return JsonResponse({'error': 'Password incorrect'}, status=401)
             
             # Generate token for the authenticated user
@@ -55,7 +53,7 @@ def login(request):
             client.close()
 
             # Return token along with user_id
-            return JsonResponse({'message': 'Login successful', 'user_id': str(user['_id']), 'token': token.decode('utf-8')}, status=200)
+            return JsonResponse({'message': 'Login successful', 'user_id': str(user['_id']), 'token': token}, status=200)
         except Exception as e:
             return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
     else:

@@ -8,6 +8,7 @@ from django.shortcuts import render
 
 # Example of importing the database connection logic and creating
 # a database connection
+
 #from .utils import get_db_handle
 
 def user_view(request):                 #http request from client

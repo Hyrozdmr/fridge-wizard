@@ -38,7 +38,7 @@ def login(request):
             user = users_collection.find_one({'email': email})
             if not user:
                 # User not found
-                return JsonResponse({'error': 'User not found'}, status=404)
+                return JsonResponse({'error': 'User not found'}, status=400)
             
             # Check if the password matches
             # if not check_password(password, user['password']):

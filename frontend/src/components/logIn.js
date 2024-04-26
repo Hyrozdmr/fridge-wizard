@@ -32,17 +32,14 @@ export default function LogIn({ onBackClick }) {
 
       AxiosInstance.post('users/login/', userInfo)
       .then((res) => {
-        console.log(res.data.token);
+        console.log(res.data.user_id);
         localStorage.setItem("token", res.data.token);
-      })
-      // AxiosInstance.post('fridges/create/') // Send post request with fridgeData body to create endpoint
-      // .then((res) => {
-      //   navigate(
-      //     '/fridge/',
-      //     // { state:{
-      //     //   user_id: fridgeData.user_id}
-      //     // }
-      //   )})
+        navigate(
+          '/fridge/',
+          { state:{
+            user_id: res.data.user_id}
+          }
+      )})
       .catch((error) => {// Handle error if POST request fails
         console.error('Error:', error);
       });

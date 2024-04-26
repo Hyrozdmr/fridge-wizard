@@ -26,7 +26,7 @@ export const signup = async (username, email, password) => {
   }
 
   const data = await response.json();
-  return data.token;
+  return data;
 };
 
 

@@ -49,22 +49,29 @@ export default function SignUp({ onBackClick }) {
           'Dairy':{ },
           'Misc':{ }
         },
-        user_id : "662a2ecac531a17f726fcbc1"
-      };
-      AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
-        .then((res) => {
-          navigate('/fridge/')
-        })
-        .catch((error) => {// Handle error if POST request fails
-          console.error('Error:', error);
-        });
-         // Log fridge creation success
-        console.log('Created default fridge for user_id ' + fridgeData.user_id);
 
-      navigate('/fridge');
+      user_id : "662a6899f9640ba036390714"
+    };
+
+    // Send post request with fridgeData body to create endpoint
+    // And then on success navigate to fridge page passing on
+    // User id details to get fridge on next page
+    AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
+      .then((res) => {
+        navigate(
+          '/fridge/',
+          { state:{
+            user_id: fridgeData.user_id}
+          }
+        )
+      .catch((error) => {// Handle error if POST request fails
+        console.error('Error:', error);
+      });
+
     } catch (error) {
       console.error('Error signing up:', error.message);
     }
+
   }
 
   return (

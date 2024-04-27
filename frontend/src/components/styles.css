@@ -5,6 +5,7 @@
   height: 100vh;
   margin-left: -200px;
   flex-direction: row;
+  font-family: 'Garamond', sans-serif;
 }
 
 .home-element-container {
@@ -56,19 +57,18 @@
   text-align: center;
   font-size: 1.8rem;
   font-weight: bold;
-  font-family: 'Garamond', sans-serif;
   min-width: 150px;
   padding: 10px;
   margin: 15px;
   border: 0px;
   border-radius: 8px;
-  background-color: tomato;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
 }
 
 .welcome-container button:hover {
-  background-color: white;
-  color: tomato;
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
 }
 
 .back-button {
@@ -80,19 +80,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: tomato;
   min-width: 40px;
   min-height: 40px;
   padding: 5px;
   margin-top: -0px;
   border-radius: 20px;
   border: none;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
 }
 
 .back-button button:hover {
-  background-color: white;
-  color: tomato;
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
 }
 
 .login-fields {

@@ -1,4 +1,8 @@
 .App {
+  --primary-text-color: black;
+  --secondary-text-color: white;
+  --primary-color: tomato;
+  --secondary-color: orange;
 }
 
 .App-logo {

@@ -1,7 +1,5 @@
 // file: frontend/src/components/welcome.js
 import React from 'react';
-import { Button } from '@mui/material';
-import FridgeImage from '../assets/Fridge-closed.jpg'
 import './styles.css';
 
 // Welcome page elements to be conditionally rendered on landing page
@@ -9,25 +7,20 @@ import './styles.css';
 export default function Welcome({ onSignUpClick, onLogInClick, }) {
 
   return (
-    <div className='container'>
-      <div className='image-container'>
-        <img src={FridgeImage} alt="Fridge" />
-      </div>
-      <div className='welcome-container'>
-        <h1>Welcome to Fridge Hero</h1>
+    <div className='welcome-container'>
+      <h2>Become a</h2>
+      <h1>Fridge Hero</h1>
+      <h2>today</h2>
 
-        <Button className='welcome-button'
-          variant='contained'
-          onClick={(onSignUpClick)}> 
-            Sign up
-        </Button>
+      <button
+        onClick={(onSignUpClick)}> 
+          Sign up
+      </button>
 
-        <Button className='welcome-button'
-          variant='contained'
-          onClick={(onLogInClick)}> 
-            Log in
-        </Button>
-      </div>
+      <button
+        onClick={(onLogInClick)}> 
+          Log in
+      </button>
     </div>
   );
 }

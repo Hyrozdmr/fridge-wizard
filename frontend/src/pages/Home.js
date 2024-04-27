@@ -4,7 +4,6 @@ import LogIn from '../components/logIn';
 import SignUp from '../components/signUp';
 import { useState } from 'react';
 import FridgeImage from '../assets/FridgeImg1.png';
-import ExplodeImage from '../assets/Explode.png';
 import '../styles.css';
 
 // Home page conditionally renders welcome, login or signup elements
@@ -51,7 +50,6 @@ export default function Home() {
   return (
     <div className='home-container'>
       <div className='image-container'>
-        <img className='explosion-image' src={ExplodeImage} alt="Comicbook style explosion" />
         <img className='fridge-image' src={FridgeImage} alt="Fridge" />
       </div>
       <div className='home-element-container'>

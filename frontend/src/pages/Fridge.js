@@ -1,8 +1,8 @@
 import AxiosInstance from '../components/axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ItemList from '../components/itemsList';
-import FridgeImage from '../assets/Fridge-open.jpg';
+import FridgeImage from '../assets/FridgeImg2.png';
 
 export default function Fridge() {
   const location = useLocation();
@@ -11,7 +11,7 @@ export default function Fridge() {
   const [itemName, setItemName] = useState('');
   const [itemCategory, setItemCategory] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
-
+  const navigate = useNavigate();
   const categories = [
     { label: '🥕 Vegetables', value: 'Vegetables' },
     { label: '🍖 Meat', value: 'Meat' },
@@ -25,6 +25,10 @@ export default function Fridge() {
       getFridgeData(userId);
     }
   }, [userId]);
+
+  function navigateToRoot() {
+    navigate('/');
+  };
 
   // Logic for getting fridge data goes here
   function getFridgeData(data) {
@@ -72,14 +76,19 @@ export default function Fridge() {
         });
   }
 
-
   return (
-      <div style={{display: 'flex', flexDirection: 'row', padding: '4em'}}>
-        <div style={{paddingRight: '8em'}}>
-          <ItemList returnedFridgeData={currentFridgeContents} />
-          <button onClick={() => getFridgeData(userId)}>
-            Refresh fridge
+      <div className='fridge-view-container'>
+        <div className='open-fridge-image-container'>
+          <button onClick={( navigateToRoot )}>
+            <h1>FH</h1>
           </button>
+          <div className='open-fridge-image'>
+            <img src={FridgeImage} alt="Fridge" />
+          </div>
+        </div>
+        <div className='item-list'>
+          <h1>What's inside?</h1>
+          <ItemList returnedFridgeData={currentFridgeContents} />
           <div>
             <select value={itemCategory} onChange={(e) => setItemCategory(e.target.value)}>
               {categories.map((option, index) => (
@@ -101,10 +110,6 @@ export default function Fridge() {
             />
             <button onClick={addItemToFridge}>Add Item</button>
           </div>
-        </div>
-        <div>
-          <p>User id: {userId}</p>
-          <img src={FridgeImage} alt="Fridge" />
         </div>
       </div>
     );

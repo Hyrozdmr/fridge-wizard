@@ -5,6 +5,7 @@ import SignUp from '../components/signUp';
 import { useState } from 'react';
 import FridgeImage from '../assets/FridgeImg1.png';
 import ExplodeImage from '../assets/Explode.png';
+import '../styles.css';
 
 // Home page conditionally renders welcome, login or signup elements
 export default function Home() {

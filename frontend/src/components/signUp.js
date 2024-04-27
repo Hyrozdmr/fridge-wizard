@@ -5,7 +5,6 @@ import SimpleTextField from './forms/simpleTextField';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import './styles.css';
 import { signup } from '../services/user_services';
 
 // Welcome page elements to be conditionally rendered on landing page
@@ -41,15 +40,15 @@ export default function SignUp({ onBackClick }) {
       
       const fridgeData = {// Set data to be sent with request when creating new fridge
         storedItems: {
-          'Welcome pack':{
+          '🎁 Welcome pack':{
             'Expired hot sauce': addDays(today, -7),
             'White miso paste': addDays(today, 7)
           },
-          'Vegetables':{ },
-          'Fruit':{ },
-          'Meat':{ },
-          'Dairy':{ },
-          'Misc':{ }
+          '🥬 Vegetables':{ },
+          '🍉 Fruit':{ },
+          '🍖 Meat':{ },
+          '🧀 Dairy':{ },
+          '🥫 Misc':{ }
         },
 
         user_id : user_id
@@ -82,46 +81,47 @@ export default function SignUp({ onBackClick }) {
 
   return (
     <div>
-            <div className='back-button'>
-        <button onClick={( onBackClick )}>
-              <ArrowBackIosNewIcon />
-        </button>
+      <div className='welcome-container'>
+        <div className='welcome-header'>
+          <div className='back-button'>
+            <button onClick={( onBackClick )}>
+                  <ArrowBackIosNewIcon />
+            </button>
+          </div>
+          <h2>Become a Fridge Hero</h2>
+        </div>
+        <form onSubmit={handleSubmit(submission)}>
+        
+          <SimpleTextField
+            label='Email'
+            name='email'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <SimpleTextField
+            label='Username'
+            name='username'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <SimpleTextField
+            label='Password'
+            name='password'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <button type='submit'>
+            Sign up
+          </button>
+        </form>
       </div>
-    <div className='welcome-container'>
-      <h2>Become a Fridge Hero</h2>
-
-      <form className='login-fields' onSubmit={handleSubmit(submission)}>
-      
-        <SimpleTextField
-          label='Email'
-          name='email'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <SimpleTextField
-          label='Username'
-          name='username'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <SimpleTextField
-          label='Password'
-          name='password'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <button type='submit'>
-          Sign up
-        </button>
-      </form>
     </div>
-  </div>
   );
 }
 

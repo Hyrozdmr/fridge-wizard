@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ItemList from '../components/itemsList';
 import FridgeImage from '../assets/FridgeImg2.png';
+import '../styles.css';
 
 export default function Fridge() {
   const location = useLocation();

@@ -5,7 +5,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import './styles.css';
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function LogIn({ onBackClick }) {
@@ -49,15 +48,16 @@ export default function LogIn({ onBackClick }) {
 
   return (
     <div>
-      <div className='back-button'>
-        <button onClick={( onBackClick )}>
-              <ArrowBackIosNewIcon />
-        </button>
-      </div>
       <div className='welcome-container'>
-      <h2>Log in to Fridge Hero</h2>
-
-      <form className='login-fields' onSubmit={handleSubmit(submission)}>
+        <div className='welcome-header'>
+          <div className='back-button'>
+            <button onClick={( onBackClick )}>
+                  <ArrowBackIosNewIcon />
+            </button>
+          </div>
+          <h2>Log in to Fridge Hero</h2>
+        </div>
+      <form onSubmit={handleSubmit(submission)}>
       
         <SimpleTextField
           label='Email'

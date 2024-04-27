@@ -1,11 +1,10 @@
 // file: frontend/src/components/signUp.js
 import React from 'react';
 import AxiosInstance from './axios';
-import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import FridgeImage from '../assets/Fridge-closed.jpg';
 import './styles.css';
 import { signup } from '../services/user_services';
 
@@ -82,18 +81,14 @@ export default function SignUp({ onBackClick }) {
   }
 
   return (
-    <div className='container'>
-    <div className='image-container'>
-      <img src={FridgeImage} alt="Fridge" />
-    </div>
+    <div>
+            <div className='back-button'>
+        <button onClick={( onBackClick )}>
+              <ArrowBackIosNewIcon />
+        </button>
+      </div>
     <div className='welcome-container'>
-      <Button className='welcome-button'
-        variant='contained'
-        onClick={( onBackClick )}> 
-          Back
-      </Button>
-
-      <h1>Get your own Fridge Hero</h1>
+      <h2>Become a Fridge Hero</h2>
 
       <form className='login-fields' onSubmit={handleSubmit(submission)}>
       
@@ -121,9 +116,9 @@ export default function SignUp({ onBackClick }) {
           >
         </SimpleTextField>
 
-        <Button className='welcome-button' variant='contained' type='submit'>
-          Submit
-        </Button>
+        <button type='submit'>
+          Sign up
+        </button>
       </form>
     </div>
   </div>

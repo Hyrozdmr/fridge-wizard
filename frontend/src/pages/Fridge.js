@@ -63,9 +63,8 @@ export default function Fridge() {
   }
 
   function addItemToFridge() {
-    // Validate all items
     for (const item of items) {
-      if (!item.name || !item.category || !item.expiry_date) {
+      if (!item.name || !item.category || item.category === "" || !item.expiry_date) {
         alert("Please fill all fields for all items before adding.");
         return;
       }
@@ -101,29 +100,37 @@ export default function Fridge() {
           {showForm && (
               <>
                 {items.map((item, index) => (
-                    <div key={index}>
-                      <select value={item.category} onChange={e => handleItemChange(index, 'category', e.target.value)}>
-                        {categories.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                        ))}
-                      </select>
-                      <input
-                          type="text"
-                          placeholder="Item Name"
-                          value={item.name}
-                          onChange={e => handleItemChange(index, 'name', e.target.value)}
-                      />
-                      <input
-                          type="date"
-                          value={item.expiry_date}
-                          onChange={e => handleItemChange(index, 'expiry_date', e.target.value)}
-                      />
-                      {index === items.length - 1 && <button onClick={addItem} className="add-more-items-button">+</button>}
+                    <div key={index} className="item-input-container">
+                      <div className="item-input-group">
+                        <select value={item.category} onChange={e => handleItemChange(index, 'category', e.target.value)}>
+                          <option value="">Choose Category...</option>
+                          {categories.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                          ))}
+                        </select>
+                        <input
+                            type="text"
+                            placeholder="Item Name"
+                            value={item.name}
+                            onChange={e => handleItemChange(index, 'name', e.target.value)}
+                        />
+                        <input
+                            type="date"
+                            value={item.expiry_date}
+                            onChange={e => handleItemChange(index, 'expiry_date', e.target.value)}
+                        />
+                      </div>
+                      {index === items.length - 1 &&
+                          <button onClick={addItem} className="add-more-items-button">+</button>}
                     </div>
                 ))}
-                <button onClick={() => { addItemToFridge(); toggleForm(); }} className="fridge-form-button">Submit All Items</button>
+                <button onClick={() => {
+                  addItemToFridge();
+                  toggleForm();
+                }} className="fridge-form-button">Submit All Items
+                </button>
                 <button onClick={toggleForm} className="fridge-form-button">Cancel</button>
               </>
           )}

@@ -223,16 +223,55 @@
 }
 
 
+.item-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Adds space between entries */
+}
+
+.item-input-group {
+  width: 100%; /* Ensures the inputs span the full width of their container */
+  display: flex;
+  flex-direction: row; /* Aligns children horizontally */
+  justify-content: space-between; /* Spreads out the children evenly */
+  align-items: center; /* Aligns children vertically */
+  padding: 10px 0; /* Adds vertical padding for visual spacing */
+}
+
+.item-input-group select,
+.item-input-group input {
+  flex-grow: 1; /* Allows each input to grow and fill the space */
+  margin: 0 10px; /* Adds horizontal margin between inputs */
+  padding: 8px 12px; /* Padding inside inputs */
+  border: 1px solid var(--primary-color); /* Border color from your theme */
+  border-radius: 4px; /* Slightly rounded corners for the inputs */
+}
+
+.item-input-group select {
+  max-width: 30%; /* Limit width of dropdown */
+}
+
+.item-input-group input[type="text"] {
+  max-width: 40%; /* Limit width of text input */
+}
+
+.item-input-group input[type="date"] {
+  max-width: 30%; /* Limit width of date picker */
+}
+
+
 .add-more-items-button {
-  font-family: 'Bangers', sans-serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 5px 10px;
-  border-radius: 50%;
+  font-size: 2rem; /* Ensure size is appropriate */
+  line-height: 1; /* Adjust line height to fit the button size */
+  padding: 5px 10px; /* Adjust padding */
+  border-radius: 50%; /* Makes the button circular */
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
   cursor: pointer;
+  margin-top: 10px; /* Adds space above the button */
 }
+
 
 .add-more-items-button:hover {
   background-color: var(--secondary-text-color);

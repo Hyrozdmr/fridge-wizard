@@ -1,12 +1,10 @@
 // file: frontend/src/components/logIn.js
 import React from 'react';
 import AxiosInstance from './axios';
-import { Button } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SimpleTextField from './forms/simpleTextField';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import FridgeImage from '../assets/Fridge-closed.jpg'
-import './styles.css';
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function LogIn({ onBackClick }) {
@@ -49,21 +47,17 @@ export default function LogIn({ onBackClick }) {
   }
 
   return (
-    <div className='container'>
-    <div className='image-container'>
-      <img src={FridgeImage} alt="Fridge" />
-    </div>
-    <div className='welcome-container'>
-
-    <Button className='welcome-button'
-        variant='contained'
-        onClick={( onBackClick )}> 
-          Back
-      </Button>
-      
-      <h1>Log in to Fridge Hero</h1>
-
-      <form className='login-fields' onSubmit={handleSubmit(submission)}>
+    <div>
+      <div className='welcome-container'>
+        <div className='welcome-header'>
+          <div className='back-button'>
+            <button onClick={( onBackClick )}>
+                  <ArrowBackIosNewIcon />
+            </button>
+          </div>
+          <h2>Log in to Fridge Hero</h2>
+        </div>
+      <form onSubmit={handleSubmit(submission)}>
       
         <SimpleTextField
           label='Email'
@@ -81,12 +75,12 @@ export default function LogIn({ onBackClick }) {
           >
         </SimpleTextField>
 
-        <Button className='welcome-button' variant='contained' type='submit' sx={{width: '100%'}}> 
-          Submit
-        </Button>
+        <button type='submit'> 
+          Log in
+        </button>
 
       </form>
-    </div>
+      </div>
     </div>
   )
 }

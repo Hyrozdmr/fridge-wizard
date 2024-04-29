@@ -1,12 +1,10 @@
 // file: frontend/src/components/signUp.js
 import React from 'react';
 import AxiosInstance from './axios';
-import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import FridgeImage from '../assets/Fridge-closed.jpg';
-import './styles.css';
 import { signup } from '../services/user_services';
 
 // Welcome page elements to be conditionally rendered on landing page
@@ -42,15 +40,15 @@ export default function SignUp({ onBackClick }) {
       
       const fridgeData = {// Set data to be sent with request when creating new fridge
         storedItems: {
-          'Welcome pack':{
+          '🎁 Welcome pack':{
             'Expired hot sauce': addDays(today, -7),
             'White miso paste': addDays(today, 7)
           },
-          'Vegetables':{ },
-          'Fruit':{ },
-          'Meat':{ },
-          'Dairy':{ },
-          'Misc':{ }
+          '🥬 Vegetables':{ },
+          '🍉 Fruit':{ },
+          '🍖 Meat':{ },
+          '🧀 Dairy':{ },
+          '🥫 Misc':{ }
         },
 
         user_id : user_id
@@ -82,51 +80,48 @@ export default function SignUp({ onBackClick }) {
   }
 
   return (
-    <div className='container'>
-    <div className='image-container'>
-      <img src={FridgeImage} alt="Fridge" />
+    <div>
+      <div className='welcome-container'>
+        <div className='welcome-header'>
+          <div className='back-button'>
+            <button onClick={( onBackClick )}>
+                  <ArrowBackIosNewIcon />
+            </button>
+          </div>
+          <h2>Become a Fridge Hero</h2>
+        </div>
+        <form onSubmit={handleSubmit(submission)}>
+        
+          <SimpleTextField
+            label='Email'
+            name='email'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <SimpleTextField
+            label='Username'
+            name='username'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <SimpleTextField
+            label='Password'
+            name='password'
+            control={control}
+            width={'30%'}
+            >
+          </SimpleTextField>
+
+          <button type='submit'>
+            Sign up
+          </button>
+        </form>
+      </div>
     </div>
-    <div className='welcome-container'>
-      <Button className='welcome-button'
-        variant='contained'
-        onClick={( onBackClick )}> 
-          Back
-      </Button>
-
-      <h1>Get your own Fridge Hero</h1>
-
-      <form className='login-fields' onSubmit={handleSubmit(submission)}>
-      
-        <SimpleTextField
-          label='Email'
-          name='email'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <SimpleTextField
-          label='Username'
-          name='username'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <SimpleTextField
-          label='Password'
-          name='password'
-          control={control}
-          width={'30%'}
-          >
-        </SimpleTextField>
-
-        <Button className='welcome-button' variant='contained' type='submit'>
-          Submit
-        </Button>
-      </form>
-    </div>
-  </div>
   );
 }
 

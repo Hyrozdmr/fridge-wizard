@@ -14,11 +14,11 @@ export default function MyTextField(props) {
           formState,
       }) => (
           <TextField
-            id="filled-basic"
+            id="standard-basic"
             label={label}
             onChange={onChange}
             value={value}
-            variant="filled" />
+            variant="standard" />
       )}
       />
   );

@@ -3,6 +3,8 @@ import Welcome from '../components/welcome';
 import LogIn from '../components/logIn';
 import SignUp from '../components/signUp';
 import { useState } from 'react';
+import FridgeImage from '../assets/FridgeImg1.png';
+import '../styles.css';
 
 // Home page conditionally renders welcome, login or signup elements
 export default function Home() {
@@ -45,5 +47,18 @@ export default function Home() {
       />
   }
   
-  return componentToRender;
+  return (
+    <div>
+      <div style={{ width: '100vw', height: '8vh', backgroundColor: 'var(--primary-color)', borderBottomColor: 'black', borderBottomWidth: '2px', borderBottomStyle: 'solid' }}></div>
+      <div className='home-container'>
+        <div className='image-container'>
+          <img className='fridge-image' src={FridgeImage} alt="Fridge" />
+        </div>
+        <div className='home-element-container'>
+          {componentToRender}
+        </div>
+      </div>
+      <div style={{ width: '100vw', height: '8vh', backgroundColor: 'var(--primary-color)', borderTopColor: 'black', borderTopWidth: '2px', borderTopStyle: 'solid' }}></div>
+    </div>
+  )
 }

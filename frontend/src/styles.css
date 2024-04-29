@@ -194,3 +194,44 @@
   font-weight: 550 ;
   color: red;
 }
+
+
+.fridge-form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 100px;
+  max-width: 180px;
+  padding: 8px 10px;
+  margin: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+}
+
+.fridge-form-button:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+
+.add-more-items-button {
+  font-size: 2rem;
+  line-height: 1;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+}
+
+.add-more-items-button:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+}

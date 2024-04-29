@@ -26,6 +26,8 @@ backend/app/__pycache__/
 backend/backend/__pycache__/
 backend/backend/controllers/__pycache__/
 backend/backend/routes/__pycache__/
+backend/tests/__pycache__/ 
+# excluding test caches as well
 
 # misc
 backend/.DS_Store

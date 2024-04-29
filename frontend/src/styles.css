@@ -63,6 +63,7 @@
   border-color: white;
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
+  font-family: 'Bangers', sans-serif;
 }
 
 .welcome-container button:hover {
@@ -117,7 +118,7 @@
     align-items: center;
     height: 100vh;
     flex-direction: row;
-    font-family: 'Garamond', sans-serif;
+    font-family: 'Bangers', sans-serif;
 }
 
 .open-fridge-image-container {
@@ -212,6 +213,7 @@
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
   cursor: pointer;
+  font-family: 'Bangers', sans-serif;
 }
 
 .fridge-form-button:hover {
@@ -222,6 +224,7 @@
 
 
 .add-more-items-button {
+  font-family: 'Bangers', sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 5px 10px;

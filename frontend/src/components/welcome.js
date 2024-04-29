@@ -12,11 +12,13 @@ export default function Welcome({ onSignUpClick, onLogInClick, }) {
       <h2>today</h2>
       <div>
         <button
+          className='login-buttons' 
           onClick={(onSignUpClick)}> 
             Sign up
         </button>
 
         <button
+          className='login-buttons' 
           onClick={(onLogInClick)}> 
             Log in
         </button>

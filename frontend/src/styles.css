@@ -49,29 +49,6 @@
   font-size: 2.4rem;
 }
 
-.welcome-container button {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
-  min-width: 120px;
-  max-width: 200px;
-  padding: 9px;
-  margin: 20px;
-  margin-top: 40px;
-  border-width: 1px;
-  border-radius: 8px;
-  border-color: white;
-  background-color: var(--primary-color);
-  color: var(--secondary-text-color);
-}
-
-.welcome-container button:hover {
-  background-color: var(--secondary-text-color);
-  color: var(--primary-color);
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--primary-color);
-}
 
 .welcome-container form {
   display: flex;
@@ -104,10 +81,38 @@
   color: var(--primary-color);
 }
 
+.iconButton {
+  margin-bottom: -20px;
+}
+
 .login-fields {
   display: flex;
   margin-left: 20px;
   flex-direction: column;
+}
+
+.login-buttons {
+  min-width: 120px;
+  max-width: 200px;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  padding: 9px;
+  margin: 20px;
+  margin-top: 40px;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  text-align: center;
+  font-weight: bold;
+  border-width: 1px;
+  border-color: white;
+}
+
+.login-buttons:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--primary-color);
 }
 
 /* FRIDGE VIEW */

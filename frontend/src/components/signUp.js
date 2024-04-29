@@ -1,5 +1,5 @@
 // file: frontend/src/components/signUp.js
-import React from 'react';
+import React, {useState} from 'react';
 import AxiosInstance from './axios';
 import { Button } from '@mui/material';
 import SimpleTextField from './forms/simpleTextField';
@@ -14,6 +14,7 @@ export default function SignUp({ onBackClick }) {
 
   // Set navigate function to be used by buttons following user input
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
   
 
   // Set default values for submitted information
@@ -24,11 +25,24 @@ export default function SignUp({ onBackClick }) {
   }
 
   // Declare a useForm variable to handle submitting information
-  const {handleSubmit, control} = useForm({defaultValues:defaultValues})  
+  const {handleSubmit, control, formState: { errors }} = useForm({defaultValues:defaultValues})  
 
 
   async function submission(data) {
     try {
+       // Validate email format
+       if (!data.email.match(/^[\w\.-]+@[\w\.-]+$/)) {
+        setErrorMessage('Invalid email format');
+        return;
+      }
+
+      // Validate password length and special characters
+      if (data.password.length < 8 || !/[!@#$%^&*()-_+={}[\]|\\:]/.test(data.password)) {
+        setErrorMessage('Password must be at least 8 characters long and contain at least one special character');
+        return;
+      }
+
+
       await signup(data.username, data.email, data.password)
       .then((res) => {
         let user_id = res.user_id;
@@ -103,6 +117,7 @@ export default function SignUp({ onBackClick }) {
           control={control}
           width={'30%'}
           >
+          {errors.email && <p className="error-message">{errors.email.message}</p>}
         </SimpleTextField>
 
         <SimpleTextField
@@ -111,6 +126,7 @@ export default function SignUp({ onBackClick }) {
           control={control}
           width={'30%'}
           >
+          {errors.username && <p className="error-message">{errors.username.message}</p>}
         </SimpleTextField>
 
         <SimpleTextField
@@ -119,12 +135,16 @@ export default function SignUp({ onBackClick }) {
           control={control}
           width={'30%'}
           >
+          {errors.password && <p className="error-message">{errors.password.message}</p>}
         </SimpleTextField>
 
         <Button className='welcome-button' variant='contained' type='submit'>
           Submit
         </Button>
       </form>
+      <div className="error-container">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </div>
     </div>
   </div>
   );

@@ -10,16 +10,17 @@ export default function Welcome({ onSignUpClick, onLogInClick, }) {
       <h2>Become a</h2>
       <h1>Fridge Hero</h1>
       <h2>today</h2>
+      <div>
+        <button
+          onClick={(onSignUpClick)}> 
+            Sign up
+        </button>
 
-      <button
-        onClick={(onSignUpClick)}> 
-          Sign up
-      </button>
-
-      <button
-        onClick={(onLogInClick)}> 
-          Log in
-      </button>
+        <button
+          onClick={(onLogInClick)}> 
+            Log in
+        </button>
+      </div>
     </div>
   );
 }

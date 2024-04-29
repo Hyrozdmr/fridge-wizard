@@ -49,7 +49,7 @@ export default function Home() {
   
   return (
     <div>
-      <div style={{ width: '100vw', height: '5vh', backgroundColor: 'var(--primary-color)', borderBottomColor: 'black', borderBottomWidth: '2px', borderBottomStyle: 'solid' }}></div>
+      <div style={{ width: '100vw', height: '8vh', backgroundColor: 'var(--primary-color)', borderBottomColor: 'black', borderBottomWidth: '2px', borderBottomStyle: 'solid' }}></div>
       <div className='home-container'>
         <div className='image-container'>
           <img className='fridge-image' src={FridgeImage} alt="Fridge" />
@@ -58,7 +58,7 @@ export default function Home() {
           {componentToRender}
         </div>
       </div>
-      <div style={{ width: '100vw', height: '5vh', backgroundColor: 'var(--primary-color)', borderTopColor: 'black', borderTopWidth: '2px', borderTopStyle: 'solid' }}></div>
+      <div style={{ width: '100vw', height: '8vh', backgroundColor: 'var(--primary-color)', borderTopColor: 'black', borderTopWidth: '2px', borderTopStyle: 'solid' }}></div>
     </div>
   )
 }

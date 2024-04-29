@@ -1,8 +1,7 @@
 .home-container {
   display: flex;
-  min-height: 100vh;
+  height: 90vh;
   font-family: 'Garamond', sans-serif;
-  height: 100%;
   justify-content: center; /* Aligns items horizontally */
   align-items: center; /* Aligns items vertically */
 }
@@ -10,7 +9,6 @@
 .home-element-container {
   width: 50%;
   max-width: 600px;
-  margin-left: 20px;
 }
 
 .image-container {

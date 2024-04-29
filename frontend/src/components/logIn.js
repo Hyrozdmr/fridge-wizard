@@ -1,15 +1,20 @@
 // file: frontend/src/components/logIn.js
-import React from 'react';
+import React, { useState } from 'react';
 import AxiosInstance from './axios';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SimpleTextField from './forms/simpleTextField';
+import SimplePasswordField from './forms/simplePasswordField';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 // Welcome page elements to be conditionally rendered on landing page
 export default function LogIn({ onBackClick }) {
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   // Set default values for submitted information
   const defaultValues = {
@@ -67,15 +72,15 @@ export default function LogIn({ onBackClick }) {
           >
         </SimpleTextField>
 
-        <SimpleTextField
+        <SimplePasswordField
           label='Password'
           name='password'
           control={control}
           width={'30%'}
           >
-        </SimpleTextField>
+        </SimplePasswordField>
 
-        <button type='submit'> 
+        <button className='login-buttons' type='submit'> 
           Log in
         </button>
 

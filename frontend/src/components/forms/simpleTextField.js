@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 export default function MyTextField(props) {
-  const {label, placeholder, name, control} = props
+  const {label, name, control} = props
   return (
       <Controller
         name = {name}

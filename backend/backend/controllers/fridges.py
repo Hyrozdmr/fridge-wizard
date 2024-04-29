@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient, UpdateOne
 import json
 import pymongo
+import requests
 from bson import ObjectId
 
 
@@ -127,3 +128,54 @@ def add_items(request, fridge_id):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+def get_recipes(request):
+    api_key = "b158f5243a9945d3b3500b1eb5ea04f0"
+
+    # Once we get the userID - make ingredients = and make a call to the DB to return a list of all ingredients that user has
+    ingredients = ["cheese", "tomato"]
+
+    url = f'https://api.spoonacular.com/recipes/complexSearch?addRecipeInstructions=true&includeIngredients={ingredients}&apiKey={api_key}'
+    
+    response = requests.get(url)
+
+    print(response.json())
+    data = response.json()
+
+    recipe_ids = [recipe['id'] for recipe in data['results']]
+
+    url = f'https://api.spoonacular.com/recipes/informationBulk?ids={recipe_ids}&apiKey={api_key}'
+    response = requests.get(url)
+    recipes_list = response.json()
+
+    formatted_recipes = []
+
+    for recipe_data in recipes_list:
+        ingredients = [ingredient["original"] for ingredient in recipe_data.get("extendedIngredients", [])]
+
+        formatted_recipe = {
+            "title": recipe_data["title"],
+            "image": recipe_data["image"],
+            "instructions": recipe_data["analyzedInstructions"],
+            "ingredients": ingredients
+        }
+        formatted_recipes.append(formatted_recipe)
+
+
+    # print(len(formatted_recipes))
+    print(json.dumps(formatted_recipes, indent=4))
+
+    print("hello")
+
+    return JsonResponse({'message': formatted_recipes}, status=200)
+
+# file: fridge-hero/backend/backend/controllers/fridges.py
+
+
+def recipes(request):
+    # You can customize the response as needed
+    response_data = {
+        'message': 'This is a blank page',
+        'status': 'success'
+    }
+    return JsonResponse(response_data)

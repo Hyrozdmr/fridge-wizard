@@ -21,6 +21,8 @@ export default function Fridge() {
     { label: '🥫 Miscellaneous', value: 'Misc' }
   ];
 
+  console.log(userId)
+
   useEffect(() => {
     if (userId) {
       getFridgeData(userId);
@@ -38,6 +40,18 @@ export default function Fridge() {
     .then(response => {
       // Handle successful response
       setCurrentFridgeContent(response.data);
+    })
+    .catch((error) => {
+      // Handle error if POST request fails
+      console.error('Error:', error);
+    });
+  }
+
+  function getRecipes() {
+    AxiosInstance.get( 'fridges/get-recipes/', { params: { user_id: userId  } })
+    .then(response => {
+      // Handle successful response
+      console.log(response)
     })
     .catch((error) => {
       // Handle error if POST request fails
@@ -110,6 +124,7 @@ export default function Fridge() {
                 onChange={(e) => setExpiryDate(e.target.value)}
             />
             <button onClick={addItemToFridge}>Add Item</button>
+            <button onClick={getRecipes}>Get Recipes</button>
           </div>
         </div>
       </div>

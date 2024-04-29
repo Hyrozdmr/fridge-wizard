@@ -1,3 +1,24 @@
+.list-padding {
+  padding-top: 10px;
+}
+
+.recipes-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  max-width: 500px;
+}
+
+.recipe-headers {
+  text-align: center;
+}
+
+
 .home-container {
   display: flex;
   height: 84vh;

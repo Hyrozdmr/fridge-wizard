@@ -124,4 +124,3 @@ export default function SignUp({ onBackClick }) {
     </div>
   );
 }
-

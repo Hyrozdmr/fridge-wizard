@@ -30,7 +30,7 @@
   justify-content: center;
   margin-top: 10px;
   text-align: center; /* Align the error message center horizontally */
-  }
+}
 
 .error-message {
   font-family: 'Open Sans', sans-serif;

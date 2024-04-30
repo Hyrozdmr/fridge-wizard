@@ -1,7 +1,6 @@
 .home-container {
   display: flex;
   height: 84vh;
-  font-family: 'Garamond', sans-serif;
   justify-content: center; /* Aligns items horizontally */
   align-items: center; /* Aligns items vertically */
 }
@@ -125,7 +124,7 @@
     align-items: center;
     height: 100vh;
     flex-direction: row;
-    font-family: 'Bangers', sans-serif;
+    font-family: 'Chopin-Trial-Medium', sans-serif;
 }
 
 .open-fridge-image-container {
@@ -179,22 +178,35 @@
 .item-list h1{
   color: var(--primary-color);
   text-align: center;
+  font-family: 'Bangers', sans-serif;
 }
 
 .item-list h2{
   color: var(--primary-color);
   padding: 10px;
   padding-left: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
   border-width: 2px;
   border-style: solid;
   border-color: var(--primary-color);
   border-radius:10px;
+  font-family: 'Bangers', sans-serif;
 }
 
 .item-list p{
   text-align: left;
 }
 
+
+.item-list ul{
+  margin-top: 0px;
+  padding-left: 10px;
+}
+
+.item {
+  margin: 6px;
+}
 .item-list button{
   letter-spacing: 0.06rem;
 }

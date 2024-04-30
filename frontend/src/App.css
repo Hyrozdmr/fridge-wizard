@@ -10,3 +10,8 @@
   font-family: 'Bangers';
   src: local('Bangers'), url(../public/Bangers.ttf) format('opentype');
 }
+
+@font-face {
+  font-family: 'Chopin-Trial-Medium';
+  src: local('Chopin-Trial-Medium'), url(../public/Chopin-Trial-Medium.ttf) format('opentype');
+}

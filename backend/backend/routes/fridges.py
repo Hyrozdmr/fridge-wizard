@@ -6,4 +6,5 @@ urlpatterns = [
     path('create/', fridge_controllers.create, name='create'),
     path('get/', fridge_controllers.get, name='get'),
     path('<str:fridge_id>/add-items/', fridge_controllers.add_items, name='add_items'),
+    path('<str:fridge_id>/remove-items/', fridge_controllers.remove_items, name='remove_items'),
 ]

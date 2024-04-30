@@ -14,7 +14,7 @@ export default function Fridge() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const categories = [
-    {label: '🥬 Vegetables', value: ' 🥬 Vegetables'},
+    {label: '🥬 Vegetables', value: '🥬 Vegetables'},
     {label: '🍖 Meat', value: '🍖 Meat'},
     {label: '🍉 Fruit', value: '🍉 Fruit'},
     {label: '🧀 Dairy', value: '🧀 Dairy'},

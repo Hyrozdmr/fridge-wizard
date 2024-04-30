@@ -205,8 +205,17 @@
 }
 
 .item {
-  margin: 6px;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Distribute space between item name and button */
+  margin: 6px 0; /* Give some vertical space between items */
 }
+
+.item-name {
+  flex-grow: 1; /* Allow item name to take up remaining space */
+  margin-right: 10px; /* Space between the item name and the button */
+}
+
 .item-list button{
   letter-spacing: 0.06rem;
 }
@@ -301,6 +310,26 @@
 
 
 .add-more-items-button:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+}
+
+.remove-item-button {
+  font-size: 1.5rem; /* Adjust font size for the minus sign */
+  width: 30px; /* Fixed width */
+  height: 30px; /* Fixed height to make it a perfect circle */
+  padding: 0; /* Remove padding */
+  border-radius: 50%; /* Circle shape */
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.remove-item-button:hover {
   background-color: var(--secondary-text-color);
   color: var(--primary-color);
 }

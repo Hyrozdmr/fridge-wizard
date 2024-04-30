@@ -1,4 +1,7 @@
+import jwt
+from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient, UpdateOne
 import json
@@ -92,37 +95,58 @@ def get(request):
 @csrf_exempt
 def add_items(request, fridge_id):
     if request.method == 'PATCH':
+        # First check token is valid
         try:
+            # Extract token
             data = json.loads(request.body)
-            items = data.get('items', [])
+            token = data.get('token')
 
-            db, client = get_db_handle(db_name='fridge_hero', host='localhost', port=27017, username='', password='')
-            fridges_collection = db['fridges']
+            # Verify token is valid
+            if token:
+                try:
+                    decoded_token = jwt.decode(token, settings.JWT_SECRET, algorithms=['HS256'])
+                    user_id = decoded_token.get('user_id')
+                    print(user_id)
 
-            updates = []
-            print( 'items', items)
-            for item in items:
-                item_category = item.get('category')
-                item_name = item.get('name')
-                expiry_date = item.get('expiry_date')
-                updates.append(
-                    UpdateOne(
-                        {'_id': ObjectId(fridge_id)},
-                        {'$set': {f'storedItems.{item_category}.{item_name}': expiry_date}}
-                    )
-                )
-            print('updates', updates)
-            print('collection', fridges_collection)
-            if updates:
-                update_result = fridges_collection.bulk_write(updates)
-                print('this is running')
-            print('update result', update_result)
-            print ('modified count', update_result.modified_count)
-            client.close()
-            if updates and update_result.modified_count > 0:
-                return JsonResponse({'message': f'{update_result.modified_count} items added successfully'}, status=200)
+                    # Perform patch request
+                    items = data.get('items', [])
+
+                    db, client = get_db_handle(db_name='fridge_hero', host='localhost', port=27017, username='', password='')
+                    fridges_collection = db['fridges']
+
+                    updates = []
+                    print( 'items', items)
+                    for item in items:
+                        item_category = item.get('category')
+                        item_name = item.get('name')
+                        expiry_date = item.get('expiry_date')
+                        updates.append(
+                            UpdateOne(
+                                {'_id': ObjectId(fridge_id)},
+                                {'$set': {f'storedItems.{item_category}.{item_name}': expiry_date}}
+                            )
+                        )
+                    print('updates', updates)
+                    print('collection', fridges_collection)
+                    if updates:
+                        update_result = fridges_collection.bulk_write(updates)
+                        print('this is running')
+                    print('update result', update_result)
+                    print ('modified count', update_result.modified_count)
+                    client.close()
+                    # Generate a new token to return with the success message
+                    new_token = _generate_token(user_id)
+
+                    if updates and update_result.modified_count > 0:
+                        return JsonResponse({ 'message': f'{update_result.modified_count} items added successfully', 'token': new_token }, status=200)
+                except jwt.ExpiredSignatureError:
+                    return JsonResponse({'error': 'Token has expired'}, status=401)
+                except jwt.InvalidTokenError:
+                    return JsonResponse({'error': 'Invalid token'}, status=401)
             else:
-                return JsonResponse({'message': 'No items were added', 'details': str(update_result.bulk_api_result)}, status=500)
+                return JsonResponse({'error': 'Token not provided'}, status=401)
+            # else:
+            #     return JsonResponse({'message': 'No items were added', 'details': str(update_result.bulk_api_result)}, status=500)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:
@@ -156,3 +180,11 @@ def remove_items(request, fridge_id):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
+def _generate_token(user_id):
+    # Generate JWT token
+    payload = {
+        'user_id': str(user_id),
+        'exp': datetime.utcnow() + timedelta(minutes=10)
+    }
+    token = jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')
+    return token  # Convert bytes to string for JSON serialization

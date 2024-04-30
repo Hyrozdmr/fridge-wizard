@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('backend.routes.users')),
     path('fridges/', include('backend.routes.fridges')),
+    path('user_profile/', include('backend.routes.user_profile')),
 ]

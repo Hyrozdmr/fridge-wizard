@@ -130,10 +130,10 @@ def add_items(request, fridge_id):
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def get_recipes(request):
-    api_key = "b158f5243a9945d3b3500b1eb5ea04f0"
+    # api key = put apikey here
 
     # Once we get the userID - make ingredients = and make a call to the DB to return a list of all ingredients that user has
-    ingredients = ["cheese", "tomato"]
+    ingredients = ["rice", "chicken"]
 
     url = f'https://api.spoonacular.com/recipes/complexSearch?addRecipeInstructions=true&includeIngredients={ingredients}&apiKey={api_key}'
     
@@ -173,7 +173,6 @@ def get_recipes(request):
 
 
 def recipes(request):
-    # You can customize the response as needed
     response_data = {
         'message': 'This is a blank page',
         'status': 'success'

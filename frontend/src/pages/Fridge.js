@@ -14,7 +14,7 @@ export default function Fridge() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const categories = [
-    {label: '🥕 Vegetables', value: ' 🥬 Vegetables'},
+    {label: '🥬 Vegetables', value: ' 🥬 Vegetables'},
     {label: '🍖 Meat', value: '🍖 Meat'},
     {label: '🍉 Fruit', value: '🍉 Fruit'},
     {label: '🧀 Dairy', value: '🧀 Dairy'},
@@ -83,6 +83,20 @@ export default function Fridge() {
         });
   }
 
+  function removeItem(category, itemName) {
+    const fridgeId = currentFridgeContents.fridge_data._id;
+    AxiosInstance.delete(`fridges/${fridgeId}/remove-items/`, {
+      data: { category, name: itemName }
+    })
+        .then(response => {
+          console.log('Item removed:', response.data);
+          getFridgeData(userId); // Refresh the list to show updated items
+        })
+        .catch(error => {
+          console.error('Error removing item:', error);
+        });
+  }
+
   return (
       <div className='fridge-view-container'>
         <div className='open-fridge-image-container'>
@@ -95,7 +109,7 @@ export default function Fridge() {
         </div>
         <div className='item-list'>
           <h1>{showForm ? 'Add Items' : "What's inside?"}</h1>
-          {!showForm && <ItemList returnedFridgeData={currentFridgeContents}/>}
+          {!showForm && <ItemList returnedFridgeData={currentFridgeContents} removeItem={removeItem}/>}
           {!showForm && <button onClick={toggleForm} className="fridge-form-button">Add Items</button>}
 
           {showForm && (

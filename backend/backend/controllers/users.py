@@ -83,9 +83,17 @@ def signup(request): # Disables CSRF protection for this view
                                        username='',
                                        password='')
 
+            # Replace the above lines with the following to use MongoDB Atlas
+            # Get the URI from settings.py
+            uri = settings.MONGODB_URI
+            # Create a MongoClient instance with the provided URI
+            client = MongoClient(uri)
+            # Get the database from the client
+            db = client.get_default_database()
+            
             users_collection = db['users']
 
-             # if the email already exists
+            # if the email already exists
             if users_collection.find_one({'email': email}):
                 return JsonResponse({'error': 'Email already in use.'}, status=400)
 

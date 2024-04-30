@@ -130,7 +130,7 @@ def add_items(request, fridge_id):
 
 @csrf_exempt
 def remove_items(request, fridge_id):
-    if request.method == 'PATCH':
+    if request.method == 'DELETE':  # Change this to handle DELETE
         try:
             data = json.loads(request.body)
             item_category = data.get('category')
@@ -155,3 +155,4 @@ def remove_items(request, fridge_id):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+

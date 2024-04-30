@@ -22,9 +22,30 @@ export default function ItemList({ returnedFridgeData }) {
         <div key={category}>
           <h2>{category}</h2>
           <ul>
-            {Object.entries(items).map(([itemName, value]) => (
-              <p className="item" key={itemName}>{`${itemName}: ${value}`}</p>
-            ))}
+            {Object.entries(items).map(([itemName, value]) => {
+              // Parse the date string into a Date object
+              const date = new Date(value);
+              // Get day, month, and year components to create string from
+              const day = date.getDate();
+              const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
+              const year = date.getFullYear();
+              // Ensure leading zeros for day and month if needed
+              const formattedDay = day < 10 ? `0${day}` : day;
+              const formattedMonth = month < 10 ? `0${month}` : month;
+              // Construct the formatted date string
+              const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
+              // Check if the date is before today
+              const isBeforeToday = date < new Date(); // New Date() creates a Date object for today
+              // Use a conditional rendering based on whether the date is before today
+              return (
+                <p
+                className='item'
+                style={{ color: isBeforeToday ? 'red' : 'black', display: 'flex', alignItems: 'center' }} key={itemName}>
+                  {isBeforeToday && <span style={{ marginRight: '0.5em' }}>⚠️</span>}
+                  {`${itemName}: ${formattedDate}`}
+                </p>
+              )
+          })}
           </ul>
         </div>
       ))}

@@ -54,7 +54,7 @@ export default function SignUp({ onBackClick }) {
       const fridgeData = {// Set data to be sent with request when creating new fridge
         storedItems: {
           '🎁 Welcome pack':{
-            'Expired hot sauce': addDays(today, -7),
+            'Hot sauce': addDays(today, -7),
             'White miso paste': addDays(today, 7)
           },
           '🥬 Vegetables':{ },

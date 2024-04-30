@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import AxiosInstance from './axios';
 import SimpleTextField from './forms/simpleTextField';
+import SimplePasswordField from './forms/simplePasswordField';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -122,16 +123,16 @@ export default function SignUp({ onBackClick }) {
             {errors.username && <p className="error-message">{errors.username.message}</p>}
           </SimpleTextField>
 
-          <SimpleTextField
+          <SimplePasswordField
             label='Password'
             name='password'
             control={control}
             width={'30%'}
             >
             {errors.password && <p className="error-message">{errors.password.message}</p>}
-          </SimpleTextField>
+          </SimplePasswordField>
 
-          <button type='submit'>
+          <button className='login-buttons' type='submit'>
             Sign up
           </button>
         </form>

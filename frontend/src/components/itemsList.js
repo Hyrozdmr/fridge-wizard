@@ -23,7 +23,7 @@ export default function ItemList({ returnedFridgeData }) {
           <h2>{category}</h2>
           <ul>
             {Object.entries(items).map(([itemName, value]) => (
-              <p key={itemName}>{`${itemName}: ${value}`}</p>
+              <p className="item" key={itemName}>{`${itemName}: ${value}`}</p>
             ))}
           </ul>
         </div>

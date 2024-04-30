@@ -22,7 +22,6 @@
 .home-container {
   display: flex;
   height: 84vh;
-  font-family: 'Garamond', sans-serif;
   justify-content: center; /* Aligns items horizontally */
   align-items: center; /* Aligns items vertically */
 }
@@ -70,30 +69,6 @@
   font-size: 2.4rem;
 }
 
-.welcome-container button {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
-  min-width: 120px;
-  max-width: 200px;
-  padding: 9px;
-  margin: 20px;
-  margin-top: 40px;
-  border-width: 1px;
-  border-radius: 8px;
-  border-color: white;
-  background-color: var(--primary-color);
-  color: var(--secondary-text-color);
-}
-
-.welcome-container button:hover {
-  background-color: var(--secondary-text-color);
-  color: var(--primary-color);
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--primary-color);
-}
-
 .welcome-container form {
   display: flex;
   flex-direction: column;
@@ -118,6 +93,7 @@
   border: none;
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
+  cursor: pointer;
 }
 
 .back-button button:hover {
@@ -125,10 +101,41 @@
   color: var(--primary-color);
 }
 
+.iconButton {
+  margin-bottom: -20px;
+}
+
 .login-fields {
   display: flex;
   margin-left: 20px;
   flex-direction: column;
+}
+
+.login-buttons {
+  min-width: 120px;
+  max-width: 200px;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  padding: 9px;
+  margin: 20px;
+  margin-top: 40px;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  text-align: center;
+  font-weight: bold;
+  border-width: 1px;
+  border-color: white;
+  font-family: 'Bangers', sans-serif;
+  letter-spacing: 0.08rem;
+  cursor: pointer;
+}
+
+.login-buttons:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--primary-color);
 }
 
 /* FRIDGE VIEW */
@@ -138,7 +145,7 @@
     align-items: center;
     height: 100vh;
     flex-direction: row;
-    font-family: 'Garamond', sans-serif;
+    font-family: 'Chopin-Trial-Medium', sans-serif;
 }
 
 .open-fridge-image-container {
@@ -148,10 +155,14 @@
 }
 
 .open-fridge-image-container button{
+  display: flex;
+  flex-direction: row;
   margin-top: 600px;
   margin-left: 400px;
-  min-width: 60px;
-  max-height: 60px;
+  justify-content: center;
+  text-align: center;
+  width: 60px;
+  height: 60px;
   font-family: 'Bangers', sans-serif;
   text-decoration: underline;
   color: var(--primary-color);
@@ -181,26 +192,44 @@
   border-left-width: 0rem;
   border-bottom-width: 0rem;
   border-radius: 50px;
-  padding: 50px
+  padding: 50px;
+  letter-spacing: 0.06rem;
 }
 
 .item-list h1{
   color: var(--primary-color);
   text-align: center;
+  font-family: 'Bangers', sans-serif;
 }
 
 .item-list h2{
   color: var(--primary-color);
   padding: 10px;
   padding-left: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
   border-width: 2px;
   border-style: solid;
   border-color: var(--primary-color);
   border-radius:10px;
+  font-family: 'Bangers', sans-serif;
 }
 
 .item-list p{
   text-align: left;
+}
+
+
+.item-list ul{
+  margin-top: 0px;
+  padding-left: 10px;
+}
+
+.item {
+  margin: 6px;
+}
+.item-list button{
+  letter-spacing: 0.06rem;
 }
 
 .error-container {
@@ -214,4 +243,85 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 550 ;
   color: red;
+}
+
+
+.fridge-form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 100px;
+  max-width: 180px;
+  padding: 8px 10px;
+  margin: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  font-family: 'Bangers', sans-serif;
+}
+
+.fridge-form-button:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+
+.item-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-input-group {
+  width: 100%; /* Ensures the inputs span the full width of their container */
+  display: flex;
+  flex-direction: row; /* Aligns children horizontally */
+  justify-content: space-between; /* Spreads out the children evenly */
+  align-items: center; /* Aligns children vertically */
+  padding: 6px 0; /* Adds vertical padding for visual spacing */
+}
+
+.item-input-group select,
+.item-input-group input {
+  flex-grow: 1; /* Allows each input to grow and fill the space */
+  margin: 0 10px; /* Adds horizontal margin between inputs */
+  padding: 8px 12px; /* Padding inside inputs */
+  border: 1px solid var(--primary-color); /* Border color from your theme */
+  border-radius: 4px; /* Slightly rounded corners for the inputs */
+}
+
+.item-input-group select {
+  max-width: 30%; /* Limit width of dropdown */
+}
+
+.item-input-group input[type="text"] {
+  max-width: 40%; /* Limit width of text input */
+}
+
+.item-input-group input[type="date"] {
+  max-width: 30%; /* Limit width of date picker */
+}
+
+
+.add-more-items-button {
+  font-size: 2rem; /* Ensure size is appropriate */
+  line-height: 1; /* Adjust line height to fit the button size */
+  padding: 5px 10px; /* Adjust padding */
+  border-radius: 50%; /* Makes the button circular */
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  margin-top: 10px; /* Adds space above the button */
+}
+
+
+.add-more-items-button:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-color);
 }

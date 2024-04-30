@@ -72,15 +72,32 @@ export default function Fridge() {
       item.expiry_date = new Date(item.expiry_date).toISOString().slice(0, 11) + "00:00:00Z";
     }
 
-    AxiosInstance.patch(`fridges/${currentFridgeContents.fridge_data._id}/add-items/`, {items})
+    try {
+      const token = localStorage.getItem('token');
+      const requestBody = {
+        token: token,
+        items: items
+      };
+      console.log(requestBody)
+
+    AxiosInstance.patch(`fridges/${currentFridgeContents.fridge_data._id}/add-items/`, requestBody)
         .then(response => {
+          console.log(localStorage.getItem('token'));
+          localStorage.setItem('token', response.data.token);
+          console.log(localStorage.getItem('token'));
           setItems([]);
           setShowForm(false);
           getFridgeData(userId);
         })
         .catch(error => {
-          console.error('Error adding items:', error);
+          console.error('Error adding items:', error.response.data.error);
+          navigate('/');
         });
+      }
+      catch(error) {
+        // Handle error if POST request fails
+        console.error('Error:', error.response.data.error);
+      }
   }
 
   return (

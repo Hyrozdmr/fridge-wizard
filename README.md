@@ -19,7 +19,7 @@ Fridge Hero helps you to save money and waste less food by keeping track of the 
 Fridge Hero was developed by Bodgan Stăiculescu, Hayri Ozdemir, Kevin Eboda, Patrick Skipworth and Sam Draper.
 
 ## Application structure
-Fridge Hero uses a React framework with Javascript, a Django backend with Python and a Mongo database.
+Fridge Hero uses a React framework with Javascript, a Django backend with Python and a Mongo database. Fridge Hero's frontend uses Axios to make requests to the backend, and the backend uses Pymongo to make HTTP requests to the MongoDB.
 
 ## Installing Fridge Hero
 To install Fridge Hero locally:
@@ -43,7 +43,7 @@ In another terminal, `cd` to `fridge-hero/backend/`. In the CLI, execute `pipenv
 While the servers are running, navigate to http://localhost:3000/ to begin using Fridge Hero.
 
 ### Running tests
-A suite of backend tests are included with Fridge Hero. All tests files are in fridge-hero/backed/tests/
+A suite of backend tests are included with Fridge Hero. All tests files are in `fridge-hero/backed/tests/` and use Python's unittest library to perform tests.
 
 To run all tests, `cd` to `fridge-hero/backend`. In the CLI, execute `python -m unittest discover -s -v tests -p '*_test.py'`.
 

@@ -152,6 +152,34 @@ def add_items(request, fridge_id):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
+@csrf_exempt
+def remove_items(request, fridge_id):
+    if request.method == 'DELETE':  # Change this to handle DELETE
+        try:
+            data = json.loads(request.body)
+            item_category = data.get('category')
+            item_name = data.get('name')
+
+            db, client = get_db_handle(db_name='fridge_hero', host='localhost', port=27017, username='', password='')
+            fridges_collection = db['fridges']
+
+            # Update to remove the item by setting it to None or using $unset
+            update_result = fridges_collection.update_one(
+                {'_id': ObjectId(fridge_id)},
+                {'$unset': {f'storedItems.{item_category}.{item_name}': ""}}  # Using $unset to remove the key
+            )
+
+            client.close()
+
+            if update_result.modified_count > 0:
+                return JsonResponse({'message': 'Item removed successfully'}, status=200)
+            else:
+                return JsonResponse({'message': 'No item was removed', 'details': 'Item not found or already removed'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 def _generate_token(user_id):
     # Generate JWT token
     payload = {

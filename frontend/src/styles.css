@@ -203,6 +203,8 @@
   color: var(--primary-color);
   padding: 10px;
   padding-left: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
   border-width: 2px;
   border-style: solid;
   border-color: var(--primary-color);
@@ -212,6 +214,15 @@
 
 .item-list p{
   text-align: left;
+}
+
+.item-list ul{
+  margin-top: 0px;
+  padding-left: 10px;
+}
+
+.item {
+  margin: 6px;
 }
 
 .error-container {

@@ -6,44 +6,48 @@ import django
 from django.conf import settings
 
 settings.configure(
-    DEBUG=True,
-    DATABASES={
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:'
-        }
-    }
+    JWT_SECRET=""
 )
+
+# settings.configure(
+#     DEBUG=True,
+#     DATABASES={
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': ':memory:'
+#         }
+#     }
+# )
 
 # Import your Django components after configuring settings
 from django.http import JsonResponse
-from backend.controllers.user_login import login, generate_token
+from backend.controllers.users import login, generate_token
 
 class TestLogin(unittest.TestCase):
 
-    # @patch('backend.controllers.user_login.get_db_handle')
-    # def test_login_success(self, mock_get_db_handle):
-    #     # Mock database response
-    #     mock_db = MagicMock()
-    #     mock_collection = MagicMock()
-    #     mock_collection.find_one.return_value = {'_id': 'user_id', 'password': 'password', 'email': 'test@example.com'}
-    #     mock_db.__getitem__.return_value = mock_collection
-    #     mock_get_db_handle.return_value = (mock_db, MagicMock())
+    @patch('backend.controllers.users.get_db_handle')
+    def test_login_success(self, mock_get_db_handle):
+        # Mock database response
+        mock_db = MagicMock()
+        mock_collection = MagicMock()
+        mock_collection.find_one.return_value = {'_id': 'user_id', 'password': 'password', 'email': 'test@example.com'}
+        mock_db.__getitem__.return_value = mock_collection
+        mock_get_db_handle.return_value = (mock_db, MagicMock())
 
-    #     # Mock request
-    #     request = MagicMock(method='POST')
-    #     request.body = '{"email": "test@example.com", "password": "password"}'
+        # Mock request
+        request = MagicMock(method='POST')
+        request.body = '{"email": "test@example.com", "password": "password"}'
 
-    #     # Call the login function
-    #     response = login(request)
+        # Call the login function
+        response = login(request)
 
-    #     # Check response status code and content
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertIn('message', response.content.decode())
-    #     self.assertIn('user_id', response.content.decode())
-    #     self.assertIn('token', response.content.decode())
+        # Check response status code and content
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('message', response.content.decode())
+        self.assertIn('user_id', response.content.decode())
+        self.assertIn('token', response.content.decode())
 
-    @patch('backend.controllers.user_login.get_db_handle')
+    @patch('backend.controllers.users.get_db_handle')
     def test_login_user_not_found(self, mock_get_db_handle):
         # Mock database response
         mock_db = MagicMock()
@@ -63,7 +67,7 @@ class TestLogin(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertIn('error', response.content.decode())
 
-    @patch('backend.controllers.user_login.get_db_handle')
+    @patch('backend.controllers.users.get_db_handle')
     def test_login_password_incorrect(self, mock_get_db_handle):
         # Mock database response
         mock_db = MagicMock()

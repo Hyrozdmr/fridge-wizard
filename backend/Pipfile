@@ -11,7 +11,6 @@ dnspython = "*"
 pytz = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
-jwt = "*"
 pyjwt = "*"
 python-dotenv = "*"
 

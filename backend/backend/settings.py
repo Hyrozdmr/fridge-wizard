@@ -27,6 +27,9 @@ load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 JWT_SECRET = os.getenv('JWT_SECRET')
 
+# MongoDB address
+MONGODB_URI = os.getenv('MONGODB_URI')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

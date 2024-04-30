@@ -173,6 +173,7 @@
   border-radius: 50px;
   padding: 50px;
   letter-spacing: 0.06rem;
+  width: 30%;
 }
 
 .item-list h1{
@@ -207,6 +208,11 @@
 .item {
   margin: 6px;
 }
+
+.item-name {
+  width: 35rem;
+}
+
 .item-list button{
   letter-spacing: 0.06rem;
 }

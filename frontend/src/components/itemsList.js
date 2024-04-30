@@ -38,12 +38,15 @@ export default function ItemList({ returnedFridgeData }) {
               const isBeforeToday = date < new Date(); // New Date() creates a Date object for today
               // Use a conditional rendering based on whether the date is before today
               return (
-                <p
+                <div
                 className='item'
-                style={{ color: isBeforeToday ? 'red' : 'black', display: 'flex', alignItems: 'center' }} key={itemName}>
-                  {isBeforeToday && <span style={{ marginRight: '0.5em' }}>⚠️</span>}
-                  {`${itemName}: ${formattedDate}`}
-                </p>
+                key={itemName}
+                style={{ color: isBeforeToday ? 'red' : 'black', display: 'flex', alignItems: 'center', flexDirection: 'row' }} >
+                    <div className='item-name' style={{ flex: 1 }}>
+                      {isBeforeToday && <span style={{ marginRight: '0.5em' }}>⚠️ Expired </span>}
+                      {itemName}</div>
+                    <div style={{ flex: 1 }}>{formattedDate}</div>
+                </div>
               )
           })}
           </ul>

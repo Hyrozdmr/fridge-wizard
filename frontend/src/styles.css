@@ -173,6 +173,7 @@
   border-radius: 50px;
   padding: 50px;
   letter-spacing: 0.06rem;
+  width: 30%;
 }
 
 .item-list h1{
@@ -211,9 +212,10 @@
   margin: 6px 0; /* Give some vertical space between items */
 }
 
-.item-name {
+.item-name {git staty
   flex-grow: 1; /* Allow item name to take up remaining space */
   margin-right: 10px; /* Space between the item name and the button */
+  width: 35rem;
 }
 
 .item-list button{

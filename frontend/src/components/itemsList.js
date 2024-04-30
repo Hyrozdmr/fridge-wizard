@@ -42,5 +42,6 @@ export default function ItemList({ returnedFridgeData, removeItem }) {
             </div>
         ))}
       </div>
+
   );
 }

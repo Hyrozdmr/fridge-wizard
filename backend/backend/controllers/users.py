@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient
 import json
+from bson.objectid import ObjectId
 
 
 
@@ -145,6 +146,43 @@ def login(request):
 
             # Return token along with user_id
             return JsonResponse({'message': 'Login successful', 'user_id': str(user['_id']), 'token': token}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@csrf_exempt
+def get_user(request):
+    # Check if GET method in request
+    if request.method == 'GET':
+        # Get the user id supplied as a parameter with the GET request
+        user_id = request.GET.get('user_id')
+
+        if not user_id:
+            return JsonResponse({'error': 'user_id parameter is missing'}, status=400)
+
+        # Get the database handle
+        db, client = get_db_handle(db_name='fridge_hero',
+                                    host='localhost',
+                                    port=27017,
+                                    username='',
+                                    password='')
+        try:
+            # Access the users collection
+            users_collection = db['users']
+
+            # Find the user by _id
+            user_data = users_collection.find_one({'_id': ObjectId(user_id)})
+
+            client.close()
+
+            # Check if the user data exists
+            if user_data:
+                # Convert ObjectId to string before serializing to JSON
+                user_data['_id'] = str(user_data['_id'])
+                return JsonResponse({'user_data': user_data}, status=200)
+            else:
+                return JsonResponse({'error': 'User not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
     else:

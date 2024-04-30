@@ -45,7 +45,7 @@ While the servers are running, navigate to http://localhost:3000/ to begin using
 ### Running tests
 A suite of backend tests are included with Fridge Hero. All tests files are in `fridge-hero/backed/tests/` and use Python's unittest library to perform tests.
 
-To run all tests, `cd` to `fridge-hero/backend`. In the CLI, execute `python -m unittest discover -s -v tests -p '*_test.py'`.
+To run all tests, `cd` to `fridge-hero/backend`. In the CLI, execute `python -m unittest discover -v -s tests -p '*_test.py'`.
 
 The outcome of each test will be printed in the terminal console.
 

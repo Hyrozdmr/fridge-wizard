@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ItemList from '../components/itemsList';
 import FridgeImage from '../assets/FridgeImg2.png';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import '../styles.css';
 
 export default function Fridge() {
@@ -86,7 +87,7 @@ export default function Fridge() {
       <div className='fridge-view-container'>
         <div className='open-fridge-image-container'>
           <button onClick={navigateToRoot}>
-            <h1>FH</h1>
+          <ArrowBackIosNewIcon /><h1>FH</h1>
           </button>
           <div className='open-fridge-image'>
             <img src={FridgeImage} alt="Fridge"/>

@@ -5,7 +5,10 @@ import json
 import pymongo
 import requests
 from bson import ObjectId
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Set up function for getting db connection
 def get_db_handle(db_name, host, port, username, password):
@@ -130,10 +133,39 @@ def add_items(request, fridge_id):
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def get_recipes(request):
-    # api key = put apikey here
 
+    api_key = os.getenv('api_key')
+    if not api_key:
+        return JsonResponse({'error': 'API key not found'}, status=500)
+
+     # get user id from the databaase
+    user_id = request.GET.get('user_id')
+    if not user_id:
+        return JsonResponse({'error': 'user_id parameter is missing!'}, status=400)
+    
+    # Get the database handle
+    db, client = get_db_handle(db_name='fridge_hero',
+                               host='localhost',
+                               port=27017,
+                               username='',
+                               password='')
+    
+    fridges_collection = db['fridges']
+
+    # Retrieve the user's fridge data
+    fridge_data = fridges_collection.find_one({'user_id': user_id})
+    if not fridge_data:
+        client.close()
+        return JsonResponse({'error': 'Fridge data not found for the user'}, status=404)
+    
+    # retrive ingredients from the database 
+    ingredients = []
+    for category, items in fridge_data.get('storedItems', {}).items():
+        for item_name, expiry_date in items.items():
+            ingredients.append(item_name)
+    
     # Once we get the userID - make ingredients = and make a call to the DB to return a list of all ingredients that user has
-    ingredients = ["rice", "chicken"]
+    # ingredients = ["chicken", "rice"]
 
     url = f'https://api.spoonacular.com/recipes/complexSearch?addRecipeInstructions=true&includeIngredients={ingredients}&apiKey={api_key}'
     
@@ -151,6 +183,13 @@ def get_recipes(request):
     formatted_recipes = []
 
     for recipe_data in recipes_list:
+
+        if 'image' in recipe_data:
+            image_url = recipe_data["image"]
+        else: 
+            #  Handle the case where 'image' key is missing
+            image_url = "Image not available"
+
         ingredients = [ingredient["original"] for ingredient in recipe_data.get("extendedIngredients", [])]
 
         formatted_recipe = {
@@ -160,8 +199,6 @@ def get_recipes(request):
             "ingredients": ingredients
         }
         formatted_recipes.append(formatted_recipe)
-
-
     # print(len(formatted_recipes))
     print(json.dumps(formatted_recipes, indent=4))
 
@@ -170,8 +207,6 @@ def get_recipes(request):
     return JsonResponse({'message': formatted_recipes}, status=200)
 
 # file: fridge-hero/backend/backend/controllers/fridges.py
-
-
 def recipes(request):
     response_data = {
         'message': 'This is a blank page',

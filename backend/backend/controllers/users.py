@@ -10,9 +10,6 @@ from pymongo import MongoClient
 import json
 from bson.objectid import ObjectId
 
-
-
-
 class PasswordValidator:
     def __init__(self, min_length=8):
         self.min_length = min_length

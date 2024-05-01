@@ -57,14 +57,16 @@ export default function Fridge() {
       // Handle error if POST request fails
       console.error('Error:', error);
     });
+    navigate('/recipes', { state: { user_id: userId } });
   }
 
-  function addItemToFridge() {
-    // Check if all fields are filled
-    if (!itemName || !itemCategory || !expiryDate) {
-      alert("Please fill all fields before adding an item.");
-      return;
-      
+  // function addItemToFridge() {
+  //   // Check if all fields are filled
+  //   if (!itemName || !itemCategory || !expiryDate) {
+  //     alert("Please fill all fields before adding an item.");
+  //     return;
+  //   }
+  // }
   function toggleForm() {
     setShowForm(!showForm);
     if (!showForm && items.length === 0) {
@@ -102,7 +104,7 @@ export default function Fridge() {
           console.error('Error adding items:', error);
         });
   }
-
+    
   return (
       <div className='fridge-view-container'>
         <div className='open-fridge-image-container'>

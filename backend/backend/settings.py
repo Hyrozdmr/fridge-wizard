@@ -84,7 +84,27 @@ TEMPLATES = [
     },
 ]
 
+## CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Specify allowed methods and headers
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Authorization',
+    'Content-Type',
+]
+
+# Allow credentials (cookies, authorization headers, etc.) to be included in requests
+CORS_ALLOW_CREDENTIALS = True
 
 # Handling HTTPS requests settings
 SECURE_SSL_REDIRECT = True

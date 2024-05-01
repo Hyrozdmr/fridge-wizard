@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from pymongo import MongoClient, UpdateOne
 import json
-import pymongo
 from bson import ObjectId
 
 

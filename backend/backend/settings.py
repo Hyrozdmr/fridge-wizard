@@ -33,7 +33,7 @@ MONGODB_URI = os.getenv('MONGODB_URI')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com']
 
 # Application definition
 
@@ -84,6 +84,11 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+
+# Handling HTTPS requests settings
+SECURE_SSL_REDIRECT = True
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 

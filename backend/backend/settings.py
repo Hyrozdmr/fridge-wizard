@@ -30,6 +30,9 @@ JWT_SECRET = os.getenv('JWT_SECRET')
 # MongoDB address
 MONGODB_URI = os.getenv('MONGODB_URI')
 
+# Define the port on which Django will run
+PORT = 8000
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 

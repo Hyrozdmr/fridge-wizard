@@ -15,6 +15,7 @@ jwt = "*"
 pyjwt = "*"
 python-dotenv = "*"
 gunicorn = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
 
 [dev-packages]
 

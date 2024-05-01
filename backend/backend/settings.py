@@ -135,6 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',  # Add your frontend URL here
+    'https://fridge-hero.onrender.com',
 ]
 
 # Static files (CSS, JavaScript, Images)

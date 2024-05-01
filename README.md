@@ -1,5 +1,5 @@
 # Fridge Hero
-©2024 Bodgan Stăiculescu, Hayri Ozdemir, Kevin Eboda, Patrick Skipworth and Sam Draper
+©2024 Bogdan Stăiculescu, Hayri Ozdemir, Kevin Eboda, Patrick Skipworth and Sam Draper
 
 ## About Fridge Hero
 Fridge Hero helps you to save money and waste less food by keeping track of the expiry dates of ingredients in your fridge, alerting you when they're past their best and suggesting recipes for your next meals based on what's going off next. Become a Fridge Hero today at: URL !
@@ -16,7 +16,7 @@ Fridge Hero helps you to save money and waste less food by keeping track of the 
 - Access Fridge Hero from a dedicated mobile app.
 
 ### Credits
-Fridge Hero was developed by Bodgan Stăiculescu, Hayri Ozdemir, Kevin Eboda, Patrick Skipworth and Sam Draper.
+Fridge Hero was developed by Bogdan Stăiculescu, Hayri Ozdemir, Kevin Eboda, Patrick Skipworth and Sam Draper.
 
 ## Application structure
 Fridge Hero uses a React framework with Javascript, a Django backend with Python and a Mongo database. Fridge Hero's frontend uses Axios to make requests to the backend, and the backend uses Pymongo to make HTTP requests to the MongoDB.

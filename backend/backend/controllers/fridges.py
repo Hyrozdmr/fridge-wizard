@@ -190,10 +190,6 @@ def get_recipes(request):
     if not api_key:
         return JsonResponse({'error': 'API key not found'}, status=500)
 
-    print("lets see if i get apoi key ")
-    print(api_key)
-    print("got it?")
-
      # get user id from the databaase
     user_id = request.GET.get('user_id')
     if not user_id:

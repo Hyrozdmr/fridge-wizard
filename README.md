@@ -34,15 +34,20 @@ In another terminal, `cd` to `fridge-hero/backend/`. In the CLI, execute `pipenv
 ## Running Fridge Hero
 To run Fridge Hero locally:
 ### Running the dev environment
-You will need an active MongoDB connection to use most of Fridge Hero's features. MongoDB connections can be managed conveniently with the Mongo Compass.
-
-In a terminal, `cd` to `fridge-hero/frontend/`. In the CLI, execute `npm install` to update dependencies, then `npm run start` to run the frontend server. By default, it runs on port 3000.
+You will need an active MongoDB connection to use most of Fridge Hero's features. MongoDB connections can be managed conveniently with the MongoDB Compass app. (You can download it from [here](https://www.mongodb.com/products/tools/compass))
 
 In another terminal, `cd` to `fridge-hero/backend/`. In the CLI, execute `pipenv install` to update dependencies, then `pipenv shell` to start the virtual environment, then `python manage.py runserver` from within the virtual environment to run the backend server. By default, it runs on port 8000.
 
-While the servers are running, navigate to http://localhost:3000/ to begin using Fridge Hero.
+In a terminal, `cd` to `fridge-hero/frontend/`. In the CLI, execute `npm install` to update dependencies, then `npm run start` to run the frontend server. By default, it runs on port 3000. Once the `frontend` starts succesfully it should then automatically open a browser window for you with Fridge Hero. 
 
-### Running tests
+Alternatively, if this doesn't happen automatically; while the servers are running, open your browser of choice and navigate to http://localhost:3000/ to begin using Fridge Hero.
+
+#### 🤩 Sign up and you'll be quickly on your way to being the hero of all of those forgotten items at the back of your fridge! 🫶🏼
+#### 🎉 You know the ones we're talking about, all the things you buy on that grocery run but you *keeeep* moving further to the back... stuff that you often avoid cooking with. 
+### <p align="center">💪🏼 Until now! 😉</p>
+
+
+## Running tests
 A suite of backend tests are included with Fridge Hero. All tests files are in `fridge-hero/backed/tests/` and use Python's unittest library to perform tests.
 
 To run all tests, `cd` to `fridge-hero/backend`. In the CLI, execute `python -m unittest discover -v -s tests -p '*_test.py'`.

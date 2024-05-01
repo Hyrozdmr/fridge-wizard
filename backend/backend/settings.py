@@ -86,6 +86,7 @@ TEMPLATES = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://fridge-hero.onrender.com',
 ]
 
 # Handling HTTPS requests settings

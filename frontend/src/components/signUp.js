@@ -28,21 +28,26 @@ export default function SignUp({ onBackClick }) {
 
   async function submission(data) {
     try {
+      console.log('Begin submission')
       // Validate email format
       if (!data.email.match(/^[\w\.-]+@[\w\.-]+$/)) {
         setErrorMessage('Invalid email format');
         return;
       }
+      console.log('Email validation pass')
 
       // Validate password length and special characters
       if (data.password.length < 8 || !/[!@#$%^&*()-_+={}[\]|\\:]/.test(data.password)) {
         setErrorMessage('Password must be at least 8 characters long and contain at least one special character');
         return;
       }
+      console.log('Password validation pass')
       
       // Call the signup function
       const res = await signup(data.username, data.email, data.password);
+      console.log('Called signup function')
       let user_id = res.user_id;
+      console.log(`Assigned user_id as ${user_id}`)
       
       const today = new Date();
       function addDays(date, days) {

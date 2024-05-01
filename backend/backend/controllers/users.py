@@ -184,6 +184,15 @@ def get_user(request):
                                     port=27017,
                                     username='',
                                     password='')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client.get_default_database()
+        
         try:
             # Access the users collection
             users_collection = db['users']

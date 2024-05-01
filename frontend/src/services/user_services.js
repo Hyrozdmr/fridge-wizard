@@ -1,3 +1,4 @@
+//file: fridge-hero/frontend/src/services/user_services.js
 export const signup = async (username, email, password) => {
   console.log('Access user_services.signup()')
   const requestData = {

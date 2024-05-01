@@ -33,7 +33,7 @@ MONGODB_URI = os.getenv('MONGODB_URI')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com']
 
 # Application definition
 

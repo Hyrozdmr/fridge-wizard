@@ -7,7 +7,7 @@ export const signup = async (username, email, password) => {
 
   console.log("function called");
 
-  const BACKEND_URL = 'http://localhost:8000/users/signup/';
+  const BACKEND_URL = 'https://fridge-hero.onrender.com/users/signup/';
 
   
   const requestOptions = {

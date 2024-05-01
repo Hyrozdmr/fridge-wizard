@@ -107,6 +107,7 @@ def get(request):
 
 @csrf_exempt
 def add_items(request, fridge_id):
+    print('')
     if request.method == 'PATCH':
         # First check token is valid
         try:

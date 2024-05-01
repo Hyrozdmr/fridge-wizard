@@ -1,33 +1,47 @@
-// file: fridge-hero/frontend/src/components/itemsList.js
-export default function ItemList({ returnedFridgeData }) {
-  // Parse the JSON string into a JavaScript object
-  // Check if returnedFridgeData is an object and has fridge_data property
+import React from 'react';
+
+export default function ItemList({ returnedFridgeData, removeItem }) {
   if (
-    typeof returnedFridgeData !== 'object' ||
-    !returnedFridgeData.fridge_data ||
-    typeof returnedFridgeData.fridge_data !== 'object'
+      typeof returnedFridgeData !== 'object' ||
+      !returnedFridgeData.fridge_data ||
+      typeof returnedFridgeData.fridge_data !== 'object'
   ) {
     console.error("Returned data is not in the expected format:", returnedFridgeData);
-    return null; // or display an error message
+    return null;
   }
-  console.log("returnedFridgeData:", returnedFridgeData); // Add this line for debugging
 
-  // Access storedItems from fridge_data
   const { storedItems } = returnedFridgeData.fridge_data;
-  console.log(storedItems)
 
   return (
-    <div>
-      {Object.entries(storedItems).map(([category, items]) => (
-        <div key={category}>
-          <h2>{category}</h2>
-          <ul>
-            {Object.entries(items).map(([itemName, value]) => (
-              <p className="item" key={itemName}>{`${itemName}: ${value}`}</p>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+      <div>
+        {Object.entries(storedItems).map(([category, items]) => (
+            <div key={category}>
+              <h2>{category}</h2>
+              <ul>
+                {Object.entries(items).map(([itemName, value]) => {
+                  const date = new Date(value);
+                  const day = date.getDate();
+                  const month = date.getMonth() + 1;
+                  const year = date.getFullYear();
+                  const formattedDay = day < 10 ? `0${day}` : day;
+                  const formattedMonth = month < 10 ? `0${month}` : month;
+                  const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
+                  const isBeforeToday = date < new Date();
+
+                  return (
+                      <li key={itemName} className="item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ flex: 1, color: isBeforeToday ? 'red' : 'black' }}>
+                    {isBeforeToday && <span style={{ marginRight: '0.5em' }}>⚠️ Expired </span>}
+                    {itemName}: {formattedDate}
+                  </span>
+                        <button onClick={() => removeItem(category, itemName)} className="remove-item-button">−</button>
+                      </li>
+                  );
+                })}
+              </ul>
+            </div>
+        ))}
+      </div>
+
   );
 }

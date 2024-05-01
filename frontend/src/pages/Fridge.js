@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import ItemList from '../components/itemsList';
 import FridgeImage from '../assets/FridgeImg2.png';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Link } from 'react-router-dom';
+import ProfileIcon from '../assets/ProfileImg.png';
 import '../styles.css';
 
 export default function Fridge() {
@@ -123,6 +125,11 @@ export default function Fridge() {
           <div className='open-fridge-image'>
             <img src={FridgeImage} alt="Fridge"/>
           </div>
+          <div className='profile-icon-container'>
+             <Link to="/profile">
+                <img src={ProfileIcon} alt="Profile"/>
+              </Link>
+            </div>
         </div>
         <div className='item-list'>
           <h1>{showForm ? 'Add Items' : "What's inside?"}</h1>

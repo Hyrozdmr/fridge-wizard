@@ -8,12 +8,7 @@ from bson import ObjectId
 
 # Set up function for getting db connection
 def get_db_handle(db_name, host, port, username, password):
-
-    client = MongoClient(host=host,
-                    port=int(port),
-                    username=username,
-                    password=password
-                    )
+    client = MongoClient(host=host, port=int(port), username=username, password=password)
     db_handle = client[db_name]
     return db_handle, client
 
@@ -33,8 +28,17 @@ def create(request):
                                     port=27017,
                                     username='',
                                     password='')
-        print('getting this far')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client.get_default_database()
+
         fridges_collection = db['fridges']
+        print('fridge created')
 
         # Insert the new fridge into the db
         fridge_id = fridges_collection.insert_one({
@@ -69,8 +73,17 @@ def get(request):
                                     port=27017,
                                     username='',
                                     password='')
-        print('getting this far')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client.get_default_database()
+
         fridges_collection = db['fridges']
+        print('got fridge data')
 
         # Insert the new fridge into the db
         fridge_data = fridges_collection.find_one({'user_id': user_id})

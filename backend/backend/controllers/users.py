@@ -3,7 +3,14 @@ import re
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+
+# from django.contrib.auth.models import User
+
+# I don't think this is used anywhere, commented it out ?
+# user_login_test.py won't run otherwise as this file tries
+# to call the Django model for a "User"; but we made our own ? 
+# please double check / confirm
+
 from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient

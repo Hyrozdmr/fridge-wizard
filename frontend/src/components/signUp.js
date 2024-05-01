@@ -39,10 +39,10 @@ export default function SignUp({ onBackClick }) {
         setErrorMessage('Password must be at least 8 characters long and contain at least one special character');
         return;
       }
-
-      await signup(data.username, data.email, data.password)
-      .then((res) => {
-        let user_id = res.user_id;
+      
+      // Call the signup function
+      const res = await signup(data.username, data.email, data.password);
+      let user_id = res.user_id;
       
       const today = new Date();
       function addDays(date, days) {
@@ -68,27 +68,29 @@ export default function SignUp({ onBackClick }) {
 
       };
 
-    // Send post request with fridgeData body to create endpoint
-    // And then on success navigate to fridge page passing on
-    // User id details to get fridge on next page
-    AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
+      // Send post request with fridgeData body to create endpoint
+      // And then on success navigate to fridge page passing on
+      // User id details to get fridge on next page
+      AxiosInstance.post('fridges/create/', fridgeData) // Send post request with fridgeData body to create endpoint
 
-    AxiosInstance.post('users/login/', data)
-    .then((res) => {
-      console.log(res.data.user_id);
-      localStorage.setItem("token", res.data.token);
-      navigate(
-        '/fridge/',
-        { state:{
-          user_id: res.data.user_id}
-        }
-    )})
-    .catch((error) => {// Handle error if POST request fails
-      console.error('Error:', error);
-    });
+      AxiosInstance.post('users/login/', data)
+      .then((res) => {
+        console.log(res.data.user_id);
+        localStorage.setItem("token", res.data.token);
+        navigate(
+          '/fridge/',
+          { state:{
+            user_id: res.data.user_id}
+          }
+      )})
+      .catch((error) => {// Handle error if POST request fails
+        console.error('Error:', error);
+      });
 
-    })} catch (error) {
-      console.error('Error signing up:', error.message);
+    } catch (error) {
+      console.error('Error signing up:, error.message');
+      // Handle error here, set error message, etc.
+      setErrorMessage('Error signing up');
     }
   }
 

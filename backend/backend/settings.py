@@ -31,7 +31,7 @@ JWT_SECRET = os.getenv('JWT_SECRET')
 MONGODB_URI = os.getenv('MONGODB_URI')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 

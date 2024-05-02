@@ -37,7 +37,7 @@ TEST_DB_NAME = os.getenv('TEST_DB_NAME')
 print("TEST_DB_NAME =", os.getenv('TEST_DB_NAME'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.getenv('DEBUG') == 'True'
 print("DEBUG_STATUS =", os.getenv('DEBUG'))
 
 # Define the port on which Django will run

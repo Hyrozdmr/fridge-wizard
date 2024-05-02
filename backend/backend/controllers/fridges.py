@@ -189,7 +189,7 @@ def get_recipes(request):
     api_key = os.getenv('api_key')
     if not api_key:
         return JsonResponse({'error': 'API key not found'}, status=500)
-
+    
      # get user id from the databaase
     user_id = request.GET.get('user_id')
     if not user_id:
@@ -218,6 +218,7 @@ def get_recipes(request):
     
     # Once we get the userID - make ingredients = and make a call to the DB to return a list of all ingredients that user has
     # ingredients = ["chicken", "rice"]
+
 
     url = f'https://api.spoonacular.com/recipes/complexSearch?addRecipeInstructions=true&includeIngredients={ingredients}&apiKey={api_key}'
     

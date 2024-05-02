@@ -20,7 +20,7 @@ export default function Fridge() {
     {label: '🍖 Meat', value: '🍖 Meat'},
     {label: '🍉 Fruit', value: '🍉 Fruit'},
     {label: '🧀 Dairy', value: '🧀 Dairy'},
-    {label: '🥫 Miscellaneous', value: ' 🥫 Misc'}
+    {label: '🥫 Miscellaneous', value: '🥫 Misc'}
   ];
 
   console.log(userId)

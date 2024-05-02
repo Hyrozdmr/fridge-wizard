@@ -48,5 +48,3 @@ def my_mongo_view():
     
     client.close()
 
-
-  

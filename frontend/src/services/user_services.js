@@ -1,13 +1,17 @@
+//file: fridge-hero/frontend/src/services/user_services.js
 export const signup = async (username, email, password) => {
+  console.log('Access user_services.signup()')
   const requestData = {
     username: username,
     email: email,
     password: password
   };
+  console.log(`Access user_services.signup():Request Data complete, current data=${username}`)
 
-  console.log("function called");
 
-  const BACKEND_URL = 'http://localhost:8000/users/signup/';
+
+  const BACKEND_URL = `${process.env.REACT_APP_BACKEND_URI}users/signup/`;
+  console.log(`Backend URL is ${BACKEND_URL}`);
 
   
   const requestOptions = {
@@ -17,8 +21,10 @@ export const signup = async (username, email, password) => {
     },
     body: JSON.stringify(requestData)
   };
+  console.log(`Request options are ${requestOptions}`);
 
   const response = await fetch(BACKEND_URL, requestOptions);
+  console.log(`Fetch request pass`);
 
   if (!response.ok) {
     const data = await response.json(); // Parse response JSON
@@ -26,6 +32,7 @@ export const signup = async (username, email, password) => {
   }
 
   const data = await response.json();
+  console.log(`Response is: ${response}`);
   return data;
 };
 

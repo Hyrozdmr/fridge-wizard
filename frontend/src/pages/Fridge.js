@@ -117,10 +117,9 @@ export default function Fridge() {
           console.error('Error adding items:', error.response.data.error);
           navigate('/');
         });
-      }
-      catch(error) {
+      } catch(error) {
         // Handle error if POST request fails
-        console.error('Error:', error.response.data.error);
+        console.error('Error:', error.message);
       }
   }
 

@@ -26,10 +26,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 JWT_SECRET = os.getenv('JWT_SECRET')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# MongoDB address
+MONGODB_URI = os.getenv('MONGODB_URI')
+print("MONGODB_URI =", os.getenv('MONGODB_URI'))
+# MongoDB db name
+DB_NAME = os.getenv('DB_NAME')
+print("DB_NAME =", os.getenv('DB_NAME'))
+TEST_DB_NAME = os.getenv('TEST_DB_NAME')
+print("TEST_DB_NAME =", os.getenv('TEST_DB_NAME'))
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG') == 'True'
+print("DEBUG_STATUS =", os.getenv('DEBUG'))
+
+# Define the port on which Django will run
+PORT = 8000
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://localhost:3000/', 'https://127.0.0.1/',  'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com', 'fridge-hero-me5u.onrender.com', 'https://fridge-hero-me5u.onrender.com']
 
 # Application definition
 
@@ -47,15 +61,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -76,9 +90,32 @@ TEMPLATES = [
     },
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+## CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Specify allowed methods and headers
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Authorization',
+    'Content-Type',
+]
+
+# Allow credentials (cookies, authorization headers, etc.) to be included in requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Handling HTTPS requests settings
+# SECURE_SSL_REDIRECT = True
+# USE_X_FORWARDED_HOST = True
+# USE_X_FORWARDED_PORT = True
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -117,16 +154,18 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',  # Add your frontend URL here
-]
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# This setting informs Django of the URI path from which your static files will be served to users
+# Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

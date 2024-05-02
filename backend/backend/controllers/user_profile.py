@@ -29,10 +29,18 @@ def update_profile(request):
 
         # Get the database handle
         db, client = get_db_handle(db_name='fridge_hero',
-                                   host='localhost', 
-                                   port=27017, 
-                                   username='', 
-                                   password='')
+                                    host='localhost',
+                                    port=27017,
+                                    username='',
+                                    password='')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client[settings.DB_NAME]
 
         users_collection = db['users']
 

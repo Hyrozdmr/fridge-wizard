@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.http import JsonResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from pymongo import MongoClient, UpdateOne
 import json
 import pymongo
@@ -15,12 +16,7 @@ load_dotenv()
 
 # Set up function for getting db connection
 def get_db_handle(db_name, host, port, username, password):
-
-    client = MongoClient(host=host,
-                    port=int(port),
-                    username=username,
-                    password=password
-                    )
+    client = MongoClient(host=host, port=int(port), username=username, password=password)
     db_handle = client[db_name]
     return db_handle, client
 
@@ -40,8 +36,17 @@ def create(request):
                                     port=27017,
                                     username='',
                                     password='')
-        print('getting this far')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client[settings.DB_NAME]
+
         fridges_collection = db['fridges']
+        print('fridge created')
 
         # Insert the new fridge into the db
         fridge_id = fridges_collection.insert_one({
@@ -76,8 +81,17 @@ def get(request):
                                     port=27017,
                                     username='',
                                     password='')
-        print('getting this far')
+
+        # Replace the above lines with the following to use MongoDB Atlas
+        # Get the URI from settings.py
+        uri = settings.MONGODB_URI
+        # Create a MongoClient instance with the provided URI
+        client = MongoClient(uri)
+        # Get the database from the client
+        db = client[settings.DB_NAME]
+
         fridges_collection = db['fridges']
+        print('got fridge data')
 
         # Insert the new fridge into the db
         fridge_data = fridges_collection.find_one({'user_id': user_id})
@@ -98,6 +112,7 @@ def get(request):
 
 @csrf_exempt
 def add_items(request, fridge_id):
+    print('')
     if request.method == 'PATCH':
         # First check token is valid
         try:
@@ -105,6 +120,22 @@ def add_items(request, fridge_id):
             data = json.loads(request.body)
             token = data.get('token')
 
+            # Get the database handle
+            db, client = get_db_handle(db_name='fridge_hero',
+                                        host='localhost',
+                                        port=27017,
+                                        username='',
+                                        password='')
+
+            # Replace the above lines with the following to use MongoDB Atlas
+            # Get the URI from settings.py
+            uri = settings.MONGODB_URI
+            # Create a MongoClient instance with the provided URI
+            client = MongoClient(uri)
+            # Get the database from the client
+            db = client[settings.DB_NAME]
+
+            fridges_collection = db['fridges']
             # Verify token is valid
             if token:
                 try:
@@ -115,7 +146,21 @@ def add_items(request, fridge_id):
                     # Perform patch request
                     items = data.get('items', [])
 
-                    db, client = get_db_handle(db_name='fridge_hero', host='localhost', port=27017, username='', password='')
+                    # Get the database handle
+                    db, client = get_db_handle(db_name='fridge_hero',
+                                            host='localhost',
+                                            port=27017,
+                                            username='',
+                                            password='')
+
+                    # Replace the above lines with the following to use MongoDB Atlas
+                    # Get the URI from settings.py
+                    uri = settings.MONGODB_URI
+                    # Create a MongoClient instance with the provided URI
+                    client = MongoClient(uri)
+                    # Get the database from the client
+                    db = client[settings.DB_NAME]
+                    
                     fridges_collection = db['fridges']
 
                     updates = []
@@ -164,7 +209,21 @@ def remove_items(request, fridge_id):
             item_category = data.get('category')
             item_name = data.get('name')
 
-            db, client = get_db_handle(db_name='fridge_hero', host='localhost', port=27017, username='', password='')
+            # Get the database handle
+            db, client = get_db_handle(db_name='fridge_hero',
+                                        host='localhost',
+                                        port=27017,
+                                        username='',
+                                        password='')
+
+            # Replace the above lines with the following to use MongoDB Atlas
+            # Get the URI from settings.py
+            uri = settings.MONGODB_URI
+            # Create a MongoClient instance with the provided URI
+            client = MongoClient(uri)
+            # Get the database from the client
+            db = client[settings.DB_NAME]
+            
             fridges_collection = db['fridges']
 
             # Update to remove the item by setting it to None or using $unset
@@ -197,10 +256,18 @@ def get_recipes(request):
     
     # Get the database handle
     db, client = get_db_handle(db_name='fridge_hero',
-                               host='localhost',
-                               port=27017,
-                               username='',
-                               password='')
+                                host='localhost',
+                                port=27017,
+                                username='',
+                                password='')
+
+    # Replace the above lines with the following to use MongoDB Atlas
+    # Get the URI from settings.py
+    uri = settings.MONGODB_URI
+    # Create a MongoClient instance with the provided URI
+    client = MongoClient(uri)
+    # Get the database from the client
+    db = client[settings.DB_NAME]
     
     fridges_collection = db['fridges']
 

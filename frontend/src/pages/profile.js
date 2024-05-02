@@ -96,16 +96,13 @@ const UserProfile = () => {
           <div className="user-details">
             <h2>User Profile</h2>
             <div>
-              <label>Username:</label>
-              <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+              <input type="text" placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
             <div>
-              <label>Email:</label>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+              <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
             </div>
             <div>
-              <label>Password:</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+              <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
             </div>
             <div>
               <button onClick={handleSave}>Save</button>

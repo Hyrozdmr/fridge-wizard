@@ -359,12 +359,15 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 40px;
+  font-family: 'Bangers', sans-serif;
+
 }
 
 .profile-container h2 {
   color: #ff6600;
   margin-bottom: 30px;
   text-align: center;
+  font-family: 'Bangers', sans-serif;
 }
 
 .user-details div {
@@ -375,6 +378,7 @@
   font-weight: bold;
   color: #333;
   display: block;
+  font-family: 'Chopin-Trial-Medium', sans-serif;
 }
 
 .user-details input[type="text"],
@@ -386,6 +390,7 @@
   border-radius: 8px;
   outline: none;
   transition: border-color 0.3s ease-in-out;
+  font-family: 'Chopin-Trial-Medium', sans-serif;
 }
 
 .user-details input[type="text"]:focus,

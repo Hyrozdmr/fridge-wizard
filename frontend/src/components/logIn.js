@@ -15,6 +15,7 @@ export default function LogIn({ onBackClick }) {
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Set default values for submitted information
   const defaultValues = {
@@ -23,7 +24,7 @@ export default function LogIn({ onBackClick }) {
   }
 
   // Declare a useForm variable to handle submitting information
-  const {handleSubmit, control} = useForm({defaultValues:defaultValues})
+  const {handleSubmit, control, formState: { errors }} = useForm({defaultValues:defaultValues})
 
   // Logic for submitting the form goes here
   async function submission(data) {
@@ -45,6 +46,13 @@ export default function LogIn({ onBackClick }) {
       )})
       .catch((error) => {// Handle error if POST request fails
         console.error('Error:', error);
+        if (error.response && error.response.status === 401) {
+          // Unauthorized: Invalid email or password
+          setErrorMessage('Invalid email or password');
+        } else {
+          // Other errors
+          setErrorMessage('Failed to login. Please enter valid data.');
+        }
       });
     } catch (error) {
       console.log('Error logging in:', error.message);
@@ -70,6 +78,7 @@ export default function LogIn({ onBackClick }) {
           control={control}
           width={'30%'}
           >
+        {errors.email && <p className="error-message">{errors.email.message}</p>}
         </SimpleTextField>
 
         <SimplePasswordField
@@ -78,13 +87,16 @@ export default function LogIn({ onBackClick }) {
           control={control}
           width={'30%'}
           >
+          {errors.password && <p className="error-message">{errors.password.message}</p>}
         </SimplePasswordField>
 
         <button className='login-buttons' type='submit'> 
           Log in
         </button>
-
       </form>
+      <div className="error-container">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </div>
       </div>
     </div>
   )

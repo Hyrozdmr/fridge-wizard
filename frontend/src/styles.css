@@ -225,14 +225,16 @@
 .error-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  text-align: center; /* Align the error message center horizontally */
+  margin-top: 0px;
+  text-align: center; 
+  margin-left: 50px;/* Align the error message center horizontally */
 }
 
 .error-message {
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   font-weight: 550 ;
   color: red;
+
 }
 
 

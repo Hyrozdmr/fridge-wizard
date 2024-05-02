@@ -159,7 +159,7 @@ export default function Fridge() {
                 <>
                     <ItemList returnedFridgeData={currentFridgeContents} removeItem={removeItem}/>
                     <button onClick={toggleForm} className="fridge-form-button">Add Items</button>
-                    <button onClick={getRecipes}>Get Recipes</button>
+                    <button onClick={getRecipes} className="fridge-form-button">Get Recipes</button>
                 </>
             )}
           {showForm && (

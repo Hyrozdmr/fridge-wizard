@@ -2,6 +2,7 @@ import AxiosInstance from '../components/axios';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles.css';
+import '../app.css';
 
 export default function Recipes() {
     const location = useLocation();

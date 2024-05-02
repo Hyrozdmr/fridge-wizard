@@ -51,7 +51,7 @@ const UserProfile = () => {
     const token = localStorage.getItem('token');
     const requestBody = { user_id: userId, username, email, password };
 
-    fetch('http://127.0.0.1:8000/user_profile/update_profile/', {
+    fetch(`${process.env.REACT_APP_BACKEND_URI}user_profile/update_profile/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

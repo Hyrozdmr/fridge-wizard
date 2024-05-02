@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,18 +30,18 @@ JWT_SECRET = os.getenv('JWT_SECRET')
 # MongoDB address
 MONGODB_URI = os.getenv('MONGODB_URI')
 print("MONGODB_URI =", os.getenv('MONGODB_URI'))
-
 # MongoDB db name
 DB_NAME = os.getenv('DB_NAME')
 print("DB_NAME =", os.getenv('DB_NAME'))
 TEST_DB_NAME = os.getenv('TEST_DB_NAME')
 print("TEST_DB_NAME =", os.getenv('TEST_DB_NAME'))
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG')
+print("DEBUG_STATUS =", os.getenv('DEBUG'))
+
 # Define the port on which Django will run
 PORT = 8000
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://localhost:3000/', 'https://127.0.0.1/',  'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com', 'fridge-hero-me5u.onrender.com', 'https://fridge-hero-me5u.onrender.com']
 

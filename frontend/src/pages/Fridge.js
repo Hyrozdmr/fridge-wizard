@@ -23,6 +23,8 @@ export default function Fridge() {
     {label: '🥫 Miscellaneous', value: ' 🥫 Misc'}
   ];
 
+  console.log(userId)
+
   useEffect(() => {
     if (userId) {
       getFridgeData(userId);
@@ -47,6 +49,26 @@ export default function Fridge() {
         });
   }
 
+  function getRecipes() {
+    AxiosInstance.get( 'fridges/get-recipes/', { params: { user_id: userId  } })
+    .then(response => {
+      // Handle successful response
+      console.log(response)
+    })
+    .catch((error) => {
+      // Handle error if POST request fails
+      console.error('Error:', error);
+    });
+    navigate('/recipes', { state: { user_id: userId } });
+  }
+
+  // function addItemToFridge() {
+  //   // Check if all fields are filled
+  //   if (!itemName || !itemCategory || !expiryDate) {
+  //     alert("Please fill all fields before adding an item.");
+  //     return;
+  //   }
+  // }
   function toggleForm() {
     setShowForm(!showForm);
     if (!showForm && items.length === 0) {
@@ -114,7 +136,7 @@ export default function Fridge() {
           console.error('Error removing item:', error);
         });
   }
-
+    
   return (
       <div className='fridge-view-container'>
         <div className='open-fridge-image-container'>
@@ -134,7 +156,7 @@ export default function Fridge() {
           <h1>{showForm ? 'Add Items' : "What's inside?"}</h1>
           {!showForm && <ItemList returnedFridgeData={currentFridgeContents} removeItem={removeItem}/>}
           {!showForm && <button onClick={toggleForm} className="fridge-form-button">Add Items</button>}
-
+          <button onClick={getRecipes}>Get Recipes</button>
           {showForm && (
               <>
                 {items.map((item, index) => (

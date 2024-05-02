@@ -94,7 +94,7 @@ const UserProfile = () => {
           <img className='fridge-image' src={FridgeImage} alt="Fridge" />
         </div>
           <div className="user-details">
-            <h2>User Profile</h2>
+            <h2>{username ? `${username}'s Profile` : 'User Profile'}</h2>
             <div>
               <input type="text" placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
             </div>

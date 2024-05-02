@@ -29,6 +29,19 @@ export default function LogIn({ onBackClick }) {
   // Logic for submitting the form goes here
   async function submission(data) {
     try {
+
+      const emailRegex = /^\S+@\S+$/i;
+    if (!emailRegex.test(data.email)) {
+      setErrorMessage('Invalid email');
+      return;
+    }
+
+    // Validate password length and special characters
+    const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
+    if (!passwordRegex.test(data.password)) {
+      setErrorMessage('Invalid password');
+      return;
+    }
       let userInfo = {
         email: data.email,
         password: data.password
@@ -46,13 +59,6 @@ export default function LogIn({ onBackClick }) {
       )})
       .catch((error) => {// Handle error if POST request fails
         console.error('Error:', error);
-        if (error.response && error.response.status === 401) {
-          // Unauthorized: Invalid email or password
-          setErrorMessage('Invalid email or password');
-        } else {
-          // Other errors
-          setErrorMessage('Failed to login. Please enter valid data.');
-        }
       });
     } catch (error) {
       console.log('Error logging in:', error.message);

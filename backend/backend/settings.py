@@ -36,7 +36,7 @@ PORT = 8000
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com', 'fridge-hero-me5u.onrender.com', 'https://fridge-hero-me5u.onrender.com']
 
 # Application definition
 

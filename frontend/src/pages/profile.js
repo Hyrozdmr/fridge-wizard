@@ -19,7 +19,7 @@ const UserProfile = () => {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       setUserId(decodedToken.user_id);
 
-      fetch(`http://127.0.0.1:8000/users/get-user/?user_id=${decodedToken.user_id}`, {
+      fetch(`${process.env.REACT_APP_BACKEND_URI}users/get-user/?user_id=${decodedToken.user_id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`

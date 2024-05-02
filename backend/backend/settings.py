@@ -17,8 +17,6 @@ import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# sys.path.append('/Users/kevineboda/.local/share/virtualenvs/backend-waKFrOHp/lib/python3.11/site-packages')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/

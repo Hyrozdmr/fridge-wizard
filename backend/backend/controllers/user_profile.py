@@ -5,9 +5,7 @@ from django.http import JsonResponse
 from pymongo import MongoClient
 from .users import PasswordValidator, EmailValidator
 import json
-
-
-
+from django.conf import settings
 
 def get_db_handle(db_name, host, port, username, password):
     client = MongoClient(host=host, port=int(port), username=username, password=password)

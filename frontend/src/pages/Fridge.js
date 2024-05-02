@@ -155,9 +155,13 @@ export default function Fridge() {
         </div>
         <div className='item-list'>
           <h1>{showForm ? 'Add Items' : "What's inside?"}</h1>
-          {!showForm && <ItemList returnedFridgeData={currentFridgeContents} removeItem={removeItem}/>}
-          {!showForm && <button onClick={toggleForm} className="fridge-form-button">Add Items</button>}
-          <button onClick={getRecipes}>Get Recipes</button>
+            {!showForm && (
+                <>
+                    <ItemList returnedFridgeData={currentFridgeContents} removeItem={removeItem}/>
+                    <button onClick={toggleForm} className="fridge-form-button">Add Items</button>
+                    <button onClick={getRecipes}>Get Recipes</button>
+                </>
+            )}
           {showForm && (
               <>
                 {items.map((item, index) => (

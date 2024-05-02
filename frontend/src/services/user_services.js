@@ -10,7 +10,7 @@ export const signup = async (username, email, password) => {
 
 
 
-  const BACKEND_URL = 'https://fridge-hero.onrender.com/users/signup/';
+  const BACKEND_URL = `${process.env.REACT_APP_BACKEND_URI}users/signup/`;
   console.log(`Backend URL is ${BACKEND_URL}`);
 
   

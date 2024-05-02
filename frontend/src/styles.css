@@ -1,3 +1,7 @@
+.list-padding {
+  padding-top: 10px;
+}
+
 .recipes-list-container {
   display: flex;
   justify-content: center;

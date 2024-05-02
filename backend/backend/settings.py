@@ -17,7 +17,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -29,6 +28,13 @@ JWT_SECRET = os.getenv('JWT_SECRET')
 
 # MongoDB address
 MONGODB_URI = os.getenv('MONGODB_URI')
+print("MONGODB_URI =", os.getenv('MONGODB_URI'))
+
+# MongoDB db name
+DB_NAME = os.getenv('DB_NAME')
+print("DB_NAME =", os.getenv('DB_NAME'))
+TEST_DB_NAME = os.getenv('TEST_DB_NAME')
+print("TEST_DB_NAME =", os.getenv('TEST_DB_NAME'))
 
 # Define the port on which Django will run
 PORT = 8000
@@ -36,7 +42,7 @@ PORT = 8000
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com', 'fridge-hero-me5u.onrender.com', 'https://fridge-hero-me5u.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://localhost:3000/', 'https://127.0.0.1/',  'fridge-hero.onrender.com', 'https://fridge-hero.onrender.com', 'fridge-hero-me5u.onrender.com', 'https://fridge-hero-me5u.onrender.com']
 
 # Application definition
 
@@ -54,16 +60,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -107,9 +112,9 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Handling HTTPS requests settings
-SECURE_SSL_REDIRECT = True
-USE_X_FORWARDED_HOST = True
-USE_X_FORWARDED_PORT = True
+# SECURE_SSL_REDIRECT = True
+# USE_X_FORWARDED_HOST = True
+# USE_X_FORWARDED_PORT = True
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -147,9 +152,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

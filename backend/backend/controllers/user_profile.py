@@ -40,7 +40,7 @@ def update_profile(request):
         # Create a MongoClient instance with the provided URI
         client = MongoClient(uri)
         # Get the database from the client
-        db = client.get_default_database()
+        db = client[settings.DB_NAME]
 
         users_collection = db['users']
 

@@ -38,7 +38,7 @@ def create(request):
         # Create a MongoClient instance with the provided URI
         client = MongoClient(uri)
         # Get the database from the client
-        db = client.get_default_database()
+        db = client[settings.DB_NAME]
 
         fridges_collection = db['fridges']
         print('fridge created')
@@ -83,7 +83,7 @@ def get(request):
         # Create a MongoClient instance with the provided URI
         client = MongoClient(uri)
         # Get the database from the client
-        db = client.get_default_database()
+        db = client[settings.DB_NAME]
 
         fridges_collection = db['fridges']
         print('got fridge data')
@@ -128,7 +128,7 @@ def add_items(request, fridge_id):
             # Create a MongoClient instance with the provided URI
             client = MongoClient(uri)
             # Get the database from the client
-            db = client.get_default_database()
+            db = client[settings.DB_NAME]
 
             fridges_collection = db['fridges']
             # Verify token is valid
@@ -154,7 +154,7 @@ def add_items(request, fridge_id):
                     # Create a MongoClient instance with the provided URI
                     client = MongoClient(uri)
                     # Get the database from the client
-                    db = client.get_default_database()
+                    db = client[settings.DB_NAME]
                     
                     fridges_collection = db['fridges']
 
@@ -217,7 +217,7 @@ def remove_items(request, fridge_id):
             # Create a MongoClient instance with the provided URI
             client = MongoClient(uri)
             # Get the database from the client
-            db = client.get_default_database()
+            db = client[settings.DB_NAME]
             
             fridges_collection = db['fridges']
 

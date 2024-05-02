@@ -31,7 +31,6 @@ export default function Recipes() {
       }
 
     // console.log(recipes)
-
     return [
     <div key="recipes-list-container">
         {recipes.map((recipe, index) => (

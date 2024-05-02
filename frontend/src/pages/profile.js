@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate } from 'react-router-dom';
+import FridgeImage from '../assets/FridgeImg1.png';
 import '../styles.css';
 
 const UserProfile = () => {
@@ -9,7 +10,7 @@ const UserProfile = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [editField, setEditField] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,34 +42,14 @@ const UserProfile = () => {
       console.error('Token not found');
     }
   }, []);
-  function navigateToRoot() {
+
+  const navigateToRoot = () => {
     navigate('/');
   };
 
-  const handleEdit = (field) => {
-    setEditField(field);
-  };
-
-  const handleCancelEdit = () => {
-    setEditField('');
-  };
-
-  const handleSave = (field) => {
+  const handleSave = () => {
     const token = localStorage.getItem('token');
-    const requestBody = { user_id: userId };
-    switch (field) {
-      case 'username':
-        requestBody.username = username;
-        break;
-      case 'email':
-        requestBody.email = email;
-        break;
-      case 'password':
-        requestBody.password = password;
-        break;
-      default:
-        break;
-    }
+    const requestBody = { user_id: userId, username, email, password };
 
     fetch('http://127.0.0.1:8000/user_profile/update_profile/', {
       method: 'POST',
@@ -83,16 +64,20 @@ const UserProfile = () => {
       console.log(data);
       // Handle success or error response
       if (data.message) {
-        // Update the user data after saving
+        setMessage('Updated successfully.');
         setUserData(prevUserData => ({
           ...prevUserData,
-          [field]: requestBody[field]
+          username,
+          email,
+          password
         }));
-        setEditField(''); // Reset edit field after saving
+      } else {
+        setMessage('Failed to update data.');
       }
     })
     .catch(error => {
-      console.error(`Error updating ${field}:`, error);
+      console.error('Error updating profile:', error);
+      setMessage('Failed to update data.');
     });
   };
 
@@ -101,61 +86,29 @@ const UserProfile = () => {
       <div className='back-button'>
         <button onClick={navigateToRoot}>
           <ArrowBackIosNewIcon /><h1>FH</h1>
-          </button>
-          </div>
+        </button>
+      </div>
       {userData ? (
-        <div>
-          <h2>User Profile</h2>
+        <div className="profile-content">
+        <div className='image-container'>
+          <img className='fridge-image' src={FridgeImage} alt="Fridge" />
+        </div>
           <div className="user-details">
+            <h2>{username ? `${username}'s Profile` : 'User Profile'}</h2>
             <div>
-              <label>Username:</label>
-              {editField === 'username' ? (
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-              ) : (
-                <p>{userData.username}</p>
-              )}
-              {editField === 'username' ? (
-                <div>
-                  <button onClick={() => handleSave('username')}>Save</button>
-                  <button onClick={handleCancelEdit}>Cancel</button>
-                </div>
-              ) : (
-                <button onClick={() => handleEdit('username')}>Edit</button>
-              )}
+              <input type="text" placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
             <div>
-              <label>Email:</label>
-              {editField === 'email' ? (
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-              ) : (
-                <p>{userData.email}</p>
-              )}
-              {editField === 'email' ? (
-                <div>
-                  <button onClick={() => handleSave('email')}>Save</button>
-                  <button onClick={handleCancelEdit}>Cancel</button>
-                </div>
-              ) : (
-                <button onClick={() => handleEdit('email')}>Edit</button>
-              )}
+              <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
             </div>
             <div>
-              <label>Password:</label>
-              {editField === 'password' ? (
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-              ) : (
-                <p>********</p>
-              )}
-              {editField === 'password' ? (
-                <div>
-                  <button onClick={() => handleSave('password')}>Save</button>
-                  <button onClick={handleCancelEdit}>Cancel</button>
-                </div>
-              ) : (
-                <button onClick={() => handleEdit('password')}>Edit</button>
-              )}
+              <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
+            </div>
+            <div>
+              <button onClick={handleSave}>Save</button>
             </div>
           </div>
+          {message && <p className={message.includes('success') ? 'success-message' : 'error-message'}>{message}</p>}
         </div>
       ) : (
         <p>Loading user profile...</p>
